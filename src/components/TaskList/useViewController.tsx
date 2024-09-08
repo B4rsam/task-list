@@ -6,7 +6,7 @@ import { ITask } from "../../interfaces/task.ts";
 const useViewController = () => {
     const firstRun = useRef(true);
     const [task, setTasks] = useState<ITask[]>([]);
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false);
 
     const handleUpdate = () => {
         setLoading(true);
@@ -56,9 +56,9 @@ const useViewController = () => {
         }
     }
 
-    const details = useMemo(() => ({ getTaskData, handleDeletion }), [task])
-    const taskIds = useMemo(() => task.map(({id}) => id), [task])
-    const taskList = useMemo(() => taskIds.map((id) => <TaskCard id={id} />), [taskIds])
+    const details = useMemo(() => ({ getTaskData, handleDeletion }), [task]);
+    const taskIds = useMemo(() => task.map(({id}) => id), [task]);
+    const taskList = useMemo(() => taskIds.map((id) => <TaskCard id={id} onEdit={dummyEdit} />), [taskIds]);
 
     useEffect(() => {
         if (firstRun.current) {

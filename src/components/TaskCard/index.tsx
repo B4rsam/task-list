@@ -1,16 +1,19 @@
 import { Box, Card, Typography } from "@mui/material";
 import { ITask } from "../../interfaces/task.ts";
-import { FC }  from "react";
+import {FC, useContext} from "react";
 import AuxButton from "../../design-system/AuxButton";
 import colorPalette from "../../constants/colorPalette.ts";
-import {MainButton} from "../../design-system";
+import { MainButton } from "../../design-system";
+import { TaskProvider } from "../MainContainer";
 
 interface ITaskCard {
-    taskData: ITask;
     id: number;
-
+    onEdit: any;
 }
-const TaskCard: FC<ITaskCard> = ({ taskData, id, ...props }) => {
+const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
+    const { getTaskData, handleDeletion } = useContext(TaskProvider);
+    const taskData = getTaskData(id);
+
     return (
         <Card
             id={taskData.id as string}
@@ -20,6 +23,7 @@ const TaskCard: FC<ITaskCard> = ({ taskData, id, ...props }) => {
                 borderRadius: "8px",
                 border: `solid 1px ${colorPalette.component.secondary.border}`,
                 backgroundColor: colorPalette.component.secondary.background,
+                marginBottom: "8px",
             }}
         >
             <Box
@@ -46,8 +50,8 @@ const TaskCard: FC<ITaskCard> = ({ taskData, id, ...props }) => {
                         display: "flex",
                     }}
                 >
-                    <AuxButton type="editButton" />
-                    <AuxButton type="deleteButton" />
+                    <AuxButton type="editButton" onClick={onEdit} />
+                    <AuxButton type="deleteButton" onDelete={handleDeletion}/>
                     <MainButton type="complete" content="Completed" />
                 </Box>
             </Box>

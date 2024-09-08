@@ -2,14 +2,24 @@ import { Box, Container, Typography } from "@mui/material";
 import TaskList from "../TaskList";
 import { MainButton } from "../../design-system";
 import colorPalette from "../../constants/colorPalette.ts";
+import useViewController from "../TaskList/useViewController.tsx";
+import { createContext } from "react";
+
+export const TaskProvider = createContext();
 
 const MainContainer = () => {
+    const {
+        taskList,
+        details,
+        dummyUpdate,
+        isLoading
+    } = useViewController();
+
     return (
         <Container sx={{
             backgroundColor: "blue",
             maxWidth: "600px",
             width: "100%",
-            maxHeight: "1024px",
             height: "100%",
             borderRadius: "20px",
             padding: "16px",
@@ -31,7 +41,9 @@ const MainContainer = () => {
                 </Typography>
                 <MainButton type="addButton" content="Add Task" />
             </Box>
-            <TaskList />
+            <TaskProvider.Provider value={details}>
+                {taskList}
+            </TaskProvider.Provider>
         </Container>
     );
 }
