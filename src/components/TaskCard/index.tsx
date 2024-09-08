@@ -1,10 +1,11 @@
 import { Box, Card, Typography } from "@mui/material";
-import {FC, useContext, useState} from "react";
+import { FC, useContext, useState } from "react";
 import AuxButton from "../../design-system/AuxButton";
 import colorPalette from "../../constants/colorPalette.ts";
-import { MainButton } from "../../design-system";
+import {MainButton, MobileButton} from "../../design-system";
 import { TaskProvider } from "../MainContainer";
-import {editStatus} from "../../services/request";
+import { editStatus } from "../../services/request";
+import {isMobile} from "../../utils/isMobile.ts";
 
 interface ITaskCard {
     id: number;
@@ -57,7 +58,7 @@ const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
                 >
                     <AuxButton type="editButton" onClick={onEdit} id={taskData.id} />
                     <AuxButton type="deleteButton" onClick={handleDeletion} id={taskData.id} />
-                    <MainButton type="complete" content="Completed" status={status} onClick={() => handleCompletion(taskData.id)}/>
+                    {!isMobile ? <MainButton type="complete" content="Completed" status={status} onClick={() => handleCompletion(taskData.id)} /> : <MobileButton type="complete" status={status} onClick={() => handleCompletion(taskData.id)} />}
                 </Box>
             </Box>
         </Card>
