@@ -16,7 +16,7 @@ const useViewController = () => {
     };
 
     const getTaskData = (id) => {
-        const tasks = new Map()
+        const tasks = new Map();
         task.forEach((item) => {
             tasks.set(item.id, item);
         });
@@ -47,18 +47,17 @@ const useViewController = () => {
     };
 
     const handleDeletion = (id) => {
-        if (confirm("Are you sure you wish to delete this task?"))
-        {
+        if (confirm("Are you sure you wish to delete this task?")) {
             deleteTask(id).then(() => {
                 const filteredItem = task.filter((task) => task.id !== id);
                 setTasks(filteredItem);
             });
         }
-    }
+    };
 
     const details = useMemo(() => ({ getTaskData, handleDeletion }), [task]);
     const taskIds = useMemo(() => task.map(({id}) => id), [task]);
-    const taskList = useMemo(() => taskIds.map((id) => <TaskCard id={id} onEdit={dummyEdit} />), [taskIds]);
+    const taskList = useMemo(() => taskIds.map((id) => <TaskCard id={id} key={id} onEdit={dummyEdit} />), [taskIds]);
 
     useEffect(() => {
         if (firstRun.current) {

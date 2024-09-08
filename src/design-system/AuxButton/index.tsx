@@ -1,24 +1,37 @@
 import { AuxButtonTypes } from "../../interfaces/buttons.ts";
-import {FC, ReactNode} from "react";
+import { FC } from "react";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { editTask } from "../../services/request";
 
 interface IAuxButton {
     type: AuxButtonTypes;
+    onClick: (id: number, text: string | undefined) => void;
+    id: number;
 }
-const AuxButton: FC<IAuxButton> = ({ type, ...props }) => {
+const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
+    const handleEdit = (id) => {
+        const input = prompt("Enter new task details:");
+        if (input != null) {
+            editTask(id, input).then(() => {
+                onClick(id, input);
+            });
+        }
+        return;
+    };
+
     switch (type) {
         case "editButton":
             return (
-                <IconButton {...props as ReactNode}>
+                <IconButton onClick={() => handleEdit(id)}>
                     <EditIcon />
                 </IconButton>
             );
         case "deleteButton":
         default:
             return (
-                <IconButton {...props as ReactNode}>
+                <IconButton onClick={() => onClick(id)}>
                     <DeleteIcon />
                 </IconButton>
             );

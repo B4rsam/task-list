@@ -1,6 +1,5 @@
 import { Box, Card, Typography } from "@mui/material";
-import { ITask } from "../../interfaces/task.ts";
-import {FC, useContext} from "react";
+import { FC, useContext } from "react";
 import AuxButton from "../../design-system/AuxButton";
 import colorPalette from "../../constants/colorPalette.ts";
 import { MainButton } from "../../design-system";
@@ -8,7 +7,7 @@ import { TaskProvider } from "../MainContainer";
 
 interface ITaskCard {
     id: number;
-    onEdit: any;
+    onEdit: (id: number, text: string) => void;
 }
 const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
     const { getTaskData, handleDeletion } = useContext(TaskProvider);
@@ -50,8 +49,8 @@ const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
                         display: "flex",
                     }}
                 >
-                    <AuxButton type="editButton" onClick={onEdit} />
-                    <AuxButton type="deleteButton" onDelete={handleDeletion}/>
+                    <AuxButton type="editButton" onClick={onEdit} id={taskData.id} />
+                    <AuxButton type="deleteButton" onClick={handleDeletion} id={taskData.id} />
                     <MainButton type="complete" content="Completed" />
                 </Box>
             </Box>
