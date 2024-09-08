@@ -20,5 +20,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "../../../Applications/WebStorm/plugins/javascript-impl/jsLanguageServicesImpl/external/lib.es5.d.ts"
+  ]
 }

@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import {Box, Button} from "@mui/material";
 import { FC } from "react";
 import { MainButtonTypes } from "../../interfaces/buttons.ts";
-import colorPallete from "../../constants/colorPallete.ts";
+import colorPalette from "../../constants/colorPalette.ts";
+import AddIcon from '@mui/icons-material/Add';
 
 interface ITaskButton {
     type: MainButtonTypes;
@@ -23,15 +24,21 @@ const MainButton: FC<ITaskButton> = ({ type, content }) => {
                     type="text"
                     startIcon=""
                     sx={{
-                        backgroundColor: colorPallete.button.mainBackgroundColor,
-                        color: colorPallete.button.mainColor,
+                        backgroundColor: colorPalette.button.mainBackgroundColor,
+                        color: colorPalette.button.mainColor,
                         paddingInline: "16px",
                         paddingBlock: "2px",
                         lineHeight: "0",
                         borderRadius: "8px",
                         fontWeight: "bold",
+                        marginBlock: "2px",
+                        border: `1px solid ${colorPalette.component.secondary.border}`,
+                        display: "flex",
+                        alignItems: "center",
                     }}
                 >
+                    <AddIcon />
+                    <Box sx={{ marginInline: "3px" }}/>
                     {content}
                 </Button>
             );

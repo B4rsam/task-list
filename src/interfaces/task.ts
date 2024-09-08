@@ -1,7 +1,6 @@
 export interface ITask {
     id: number;
-    label: string;
-    description: string;
+    userId: number;
+    todo: string;
     completed: boolean;
-    dueDate: string;
 }
