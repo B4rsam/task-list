@@ -1,7 +1,7 @@
-import { getTasks, addTask, deleteTask } from "../../services/request.js";
+import { getTasks, addTask, deleteTask } from "../services/request.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import TaskCard from "../TaskCard";
-import { ITask } from "../../interfaces/task.ts";
+import TaskCard from "../components/TaskCard";
+import { ITask } from "../interfaces/task.ts";
 
 const useViewController = () => {
     const firstRun = useRef(true);

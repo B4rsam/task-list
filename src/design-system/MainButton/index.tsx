@@ -7,13 +7,24 @@ import AddIcon from '@mui/icons-material/Add';
 interface ITaskButton {
     type: MainButtonTypes;
     content: string;
+    status?: boolean;
+    onClick: (any) => void;
 }
-const MainButton: FC<ITaskButton> = ({ type, content }) => {
+const MainButton: FC<ITaskButton> = ({ type, content, status, onClick }) => {
     switch(type) {
         case "complete":
             return (
-                <Button >
-                    {content}
+                <Button
+                    sx={{
+                        width: "128px",
+                        borderRadius: "8px",
+                        fontWeight: "bold",
+                        backgroundColor: `${status ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
+                        color: `${status ? colorPalette.button.mainColor : colorPalette.button.auxColor}`,
+                    }}
+                    onClick={onClick}
+                >
+                    {status ? "Completed" : "Complete"}
                 </Button>
             );
         case "addButton":
@@ -23,6 +34,7 @@ const MainButton: FC<ITaskButton> = ({ type, content }) => {
                     variant="contained"
                     type="text"
                     startIcon=""
+                    onClick={onClick}
                     sx={{
                         backgroundColor: colorPalette.button.mainBackgroundColor,
                         color: colorPalette.button.mainColor,

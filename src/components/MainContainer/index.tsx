@@ -1,8 +1,7 @@
-import { Box, Container, Typography } from "@mui/material";
-import TaskList from "../TaskList";
+import {Box, colors, Container, Typography} from "@mui/material";
 import { MainButton } from "../../design-system";
 import colorPalette from "../../constants/colorPalette.ts";
-import useViewController from "../TaskList/useViewController.tsx";
+import useViewController from "../../utils/useViewController.tsx";
 import { createContext } from "react";
 
 export const TaskProvider = createContext();
@@ -17,7 +16,7 @@ const MainContainer = () => {
 
     return (
         <Container sx={{
-            backgroundColor: "blue",
+            backgroundColor: colorPalette.component.main.background,
             maxWidth: "600px",
             width: "100%",
             height: "100%",
@@ -42,7 +41,19 @@ const MainContainer = () => {
                 <MainButton type="addButton" content="Add Task" />
             </Box>
             <TaskProvider.Provider value={details}>
-                {taskList}
+                {!isLoading ?
+                    taskList :
+                    <Typography
+                        sx={{
+                            fontWeight: "bold",
+                            textAlign: "center",
+                            color: colorPalette.textContent.main,
+                            fontSize: "24px",
+                        }}
+                    >
+                        Now Loading...
+                    </Typography>
+                }
             </TaskProvider.Provider>
         </Container>
     );

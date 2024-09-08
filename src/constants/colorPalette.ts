@@ -12,9 +12,7 @@ const colorPalette = {
     },
     component: {
         main: {
-            border: {
-
-            },
+            background: "rgb(55, 100, 128)",
         },
         secondary: {
             border: "rgba(106, 114, 126, 0.2)",
