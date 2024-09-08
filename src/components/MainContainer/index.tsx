@@ -1,13 +1,18 @@
 import { Box, Container, Typography } from "@mui/material";
-import {MainButton, MobileButton} from "../../design-system";
+import { MainButton, MobileButton } from "../../design-system";
 import colorPalette from "../../constants/colorPalette.ts";
 import useViewController from "../../utils/useViewController.tsx";
-import { createContext } from "react";
+import {createContext, useState} from "react";
 import { isMobile } from "../../utils/isMobile.ts";
+import TaskModal from "../TaskModal";
 
 export const TaskProvider = createContext();
 
 const MainContainer = () => {
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const handleModal = () => {
+        setShowModal(!showModal);
+    }
     const {
         taskList,
         details,
@@ -47,7 +52,8 @@ const MainContainer = () => {
                 >
                     Task List
                 </Typography>
-                {!isMobile ? <MainButton type="addButton" content="Add Task" /> : <MobileButton type="addButton" />}
+                <TaskModal handleModal={handleModal} state={showModal}/>
+                {!isMobile ? <MainButton type="addButton" content="Add Task" onClick={handleModal}/> : <MobileButton type="addButton" onClick={handleModal}/>}
             </Box>
             <TaskProvider.Provider value={details}>
                 {isMobile ? <Box sx={{ height: "32px" }}/> : null}

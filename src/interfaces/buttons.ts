@@ -1,2 +1,2 @@
-export type MainButtonTypes = "addButton" | "complete";
-export type AuxButtonTypes = "editButton" | "deleteButton";
+export type MainButtonTypes = "addButton" | "complete" | "submit";
+export type AuxButtonTypes = "editButton" | "deleteButton" | "cancel";
