@@ -11,7 +11,6 @@ function App() {
 
 export default App
 // components:
-// button: add, edit, complete, remove tasks
 // input: task details
 // Main Container: desktop, mobile
 // Task Container

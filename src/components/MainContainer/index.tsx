@@ -1,5 +1,6 @@
 import { Box, Container, Typography} from "@mui/material";
 import TaskList from "../TaskList";
+import { MainButton } from "../../design-system";
 
 const MainContainer = () => {
     return (
@@ -15,17 +16,16 @@ const MainContainer = () => {
             <Box sx={{
                 display: "flex",
                 justifyContent: "space-between",
+                marginBottom: "16px",
             }}>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h3">
                     Task List
                 </Typography>
-                <div>
-                    add
-                </div>
+                <MainButton type="addButton" content="Add Task" />
             </Box>
             <TaskList />
         </Container>
-    )
+    );
 }
 
 export default MainContainer;
