@@ -1,8 +1,7 @@
 import apiInstance from "./instance.js";
 
 const getTasks = async () => {
-    const response = apiInstance.get();
-    return response;
+    return apiInstance.get();
 }
 
 function deleteTask(id) {

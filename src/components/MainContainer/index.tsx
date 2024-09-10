@@ -63,7 +63,7 @@ const MainContainer = () => {
                         sx={{
                             fontWeight: "bold",
                             textAlign: "center",
-                            color: colorPalette.textContent.main,
+                            color: colorPalette.textContent.taskLabel,
                             fontSize: "24px",
                         }}
                     >

@@ -6,17 +6,19 @@ import AddIcon from '@mui/icons-material/Add';
 
 interface ITaskButton {
     type: MainButtonTypes;
-    content: string;
+    content?: string;
     status?: boolean;
     onClick: (any) => void;
+    disabled?: boolean;
 }
-const MainButton: FC<ITaskButton> = ({ type, content, status, onClick }) => {
+const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, onClick }) => {
     switch(type) {
         case "submit":
             return (
                 <Button
                     variant="contained"
                     type="text"
+                    disabled={disabled}
                     startIcon=""
                     onClick={onClick}
                     sx={{
@@ -28,7 +30,8 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, onClick }) => {
                         borderRadius: "8px",
                         fontWeight: "bold",
                         marginBlock: "2px",
-                        border: `1px solid ${colorPalette.component.secondary.border}`,
+                        border: `1px solid ${colorPalette.component.main.border}`,
+                        boxShadow: `0 3px 1px ${colorPalette.button.mainShadow}`,
                         display: "flex",
                         alignItems: "center",
                         height: "24px!important",
@@ -47,6 +50,7 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, onClick }) => {
                         fontWeight: "bold",
                         backgroundColor: `${status ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
                         color: `${status ? colorPalette.button.mainColor : colorPalette.button.auxColor}`,
+                        boxShadow: `0 3px 1px ${status ? colorPalette.button.mainShadow : colorPalette.button.auxShadow}`,
                     }}
                     onClick={onClick}
                 >
@@ -71,6 +75,7 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, onClick }) => {
                         fontWeight: "bold",
                         marginBlock: "2px",
                         border: `1px solid ${colorPalette.component.secondary.border}`,
+                        boxShadow: `0 3px 1px ${colorPalette.button.mainShadow}`,
                         display: "flex",
                         alignItems: "center",
                     }}
