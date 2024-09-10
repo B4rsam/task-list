@@ -8,7 +8,7 @@ const colorPalette = {
         auxColor: "hsl(221, 14%, 31%)",
     },
     textContent: {
-        main: "hsl(6, 63%, 50%)",
+        main: "hsl(0, 0%, 100%)",
         taskLabel: "hsl(0, 0%, 100%)",
         taskContent: "hsl(0, 0%, 100%)",
         icon: "hsl(6, 70%, 34%)",
@@ -18,7 +18,7 @@ const colorPalette = {
             background: "hsl(222, 26%, 31%)",
         },
         main: {
-            background: "hsl(223, 31%, 20%)",
+            background: "hsl(224, 36%, 15%)",
             border: "rgba(27, 50, 64, 0.2)",
             shadow: "red",
         },

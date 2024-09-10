@@ -5,7 +5,7 @@ import colorPalette from "../../constants/colorPalette.ts";
 import {MainButton, MobileButton} from "../../design-system";
 import { TaskProvider } from "../MainContainer";
 import { editStatus } from "../../services/request";
-import {isMobile} from "../../utils/isMobile.ts";
+import { isMobile } from "../../utils/isMobile.ts";
 
 interface ITaskCard {
     id: number;
@@ -28,7 +28,7 @@ const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
                 paddingInline: "16px",
                 borderRadius: "8px",
                 border: `solid 1px ${colorPalette.component.secondary.border}`,
-                backgroundColor: colorPalette.component.secondary.background,
+                backgroundColor: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.component.main.background}`,
                 marginBottom: "8px",
             }}
         >
@@ -46,6 +46,7 @@ const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "normal",
+                        fontWeight : `${!isMobile ? "normal" : "bold"}`
                     }}
                 >
                     {taskData.todo}

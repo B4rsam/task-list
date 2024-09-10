@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { editTask } from "../../services/request";
 import CloseIcon from '@mui/icons-material/Close';
 import colorPalette from "../../constants/colorPalette.ts";
+import { isMobile } from "../../utils/isMobile.ts";
 
 interface IAuxButton {
     type: AuxButtonTypes;
@@ -41,7 +42,7 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                 <IconButton
                     onClick={() => handleEdit(id)}
                     sx={{
-                        color: colorPalette.component.main.background,
+                        color: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.button.mainBackgroundColor}`,
                     }}
                 >
                     <EditIcon />
@@ -53,7 +54,7 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                 <IconButton
                     onClick={() => onClick(id as number, undefined)}
                     sx={{
-                        color: colorPalette.component.main.background,
+                        color: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.button.mainBackgroundColor}`,
                     }}
                 >
                     <DeleteIcon />

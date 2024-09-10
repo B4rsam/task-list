@@ -108,7 +108,8 @@ const TaskModal: FC<IModal> = ({ handleModal, state }) => {
                 </Box>
                 <Box
                     sx={{
-                        marginBlock: "16px",
+                        marginTop: "16px",
+                        marginBottom: "32px",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
