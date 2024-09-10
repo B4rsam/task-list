@@ -15,13 +15,14 @@ interface IAuxButton {
 }
 const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
     const handleEdit = (id) => {
-        const input = prompt("Enter new task details:");
-        if (input != null) {
-            editTask(id, input).then(() => {
-                onClick(id, input);
-            });
-        }
-        return;
+        // const input = prompt("Enter new task details:");
+        // if (input != null) {
+        //     editTask(id, input).then(() => {
+        //         onClick(id, input);
+        //     });
+        // }
+        // return;
+        onClick(id);
     };
 
     switch (type) {
@@ -42,7 +43,7 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                 <IconButton
                     onClick={() => handleEdit(id)}
                     sx={{
-                        color: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.button.mainBackgroundColor}`,
+                        color: `${!isMobile ? colorPalette.component.main.background : colorPalette.button.mainBackgroundColor}`,
                     }}
                 >
                     <EditIcon />
@@ -54,7 +55,7 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                 <IconButton
                     onClick={() => onClick(id as number, undefined)}
                     sx={{
-                        color: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.button.mainBackgroundColor}`,
+                        color: `${!isMobile ? colorPalette.component.main.background : colorPalette.button.mainBackgroundColor}`,
                     }}
                 >
                     <DeleteIcon />
