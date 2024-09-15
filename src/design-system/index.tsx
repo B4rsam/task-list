@@ -3,3 +3,4 @@ export { default as AuxButton } from "./AuxButton";
 export { default as MobileButton } from "./MobileButton";
 export { default as TaskInput } from "./TaskInput";
 export { default as TaskCheckBox } from "./TaskCheckBox";
+export { default as TextAreaCustom } from "./TextAreaCustom";

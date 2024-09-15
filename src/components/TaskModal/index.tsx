@@ -1,7 +1,7 @@
-import { Box, Modal, Typography } from "@mui/material";
+import {Box, Modal, TextareaAutosize, Typography} from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "../../constants/colorPalette.ts";
-import { AuxButton, MainButton, TaskInput } from "../../design-system";
+import {AuxButton, MainButton, TaskInput, TextAreaCustom} from "../../design-system";
 import { ITask } from "../../interfaces/task.ts";
 import { addTask } from "../../services/request";
 
@@ -68,15 +68,20 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
             onClose={handleModal}
             sx={{
                 zIndex: "4501",
+                paddingInline: "16px",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
             }}
         >
             <Box
                 sx={{
-                    width: "256px",
+                    maxWidth: "512px",
+                    width: "100%",
                     backgroundColor: colorPalette.component.secondary.background,
                     borderRadius: "8px",
                     marginTop: "24vh",
-                    marginInline: "auto",
+                    marginInline: "16px",
                     padding: "8px",
                     display: "flex",
                     flexDirection: "column",
@@ -88,13 +93,15 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                 <Box
                     sx={{
                         display: "flex",
+                        position: "relative",
+                        alignItems: "center",
+                        justifyContent: "space-between",
                     }}
                 >
-                    <Box sx={{ width: "34px" }} />
                     <Typography
                         variant="h5"
                         sx={{
-                            textAlign: "center",
+                            textAlign: "left",
                             color: colorPalette.textContent.main,
                             fontWeight: "bold",
                         }}
@@ -107,18 +114,21 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                     sx={{
                         marginTop: "16px",
                         marginBottom: "32px",
-                        display: "flex",
-                        flexDirection: "column",
                         alignItems: "center",
                     }}
                 >
-                    <TaskInput label="Todo" value={modalValue.todo} onChange={(e) => handleInput(0, e.target.value)} />
+                    {/*<TaskInput*/}
+                    {/*    label="Todo"*/}
+                    {/*    value={modalValue.todo}*/}
+                    {/*    onChange={(e) => handleInput(0, e.target.value)}*/}
+                    {/*/>*/}
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e) => handleInput(0, e.target.value)}/>
                     <Box
                         sx={{
                             marginBlock: "4px",
                         }}
                     />
-                    <MainButton type="complete" onClick={() => handleInput(1, undefined)} status={isComplete} />
+                    {/*<MainButton type="complete" onClick={() => handleInput(1, undefined)} status={isComplete} />*/}
                 </Box>
                 <MainButton type="submit" content="Submit" onClick={handleSubmit} disabled={error} />
             </Box>

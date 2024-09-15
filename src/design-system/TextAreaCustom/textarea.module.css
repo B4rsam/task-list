@@ -1,0 +1,11 @@
+.textArea {
+    appearance: none;
+    border: none;
+    resize: none;
+    min-width: 240px;
+    max-width: 430px;
+
+    &:focus {
+        outline: none;
+    }
+}

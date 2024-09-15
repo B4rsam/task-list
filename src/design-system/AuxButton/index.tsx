@@ -33,6 +33,9 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                     sx={{
                         alignItems: "top",
                         color: colorPalette.component.main.background,
+                        position: "absolute",
+                        top: "-5px",
+                        right: `${!isMobile ? "-180px" : "-28vw" }`,
                     }}
                 >
                     <CloseIcon />
