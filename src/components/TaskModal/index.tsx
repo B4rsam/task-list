@@ -1,9 +1,9 @@
-import {Box, Modal, TextareaAutosize, Typography} from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "../../constants/colorPalette.ts";
-import {AuxButton, MainButton, TaskInput, TextAreaCustom} from "../../design-system";
+import { AuxButton, MainButton, TextAreaCustom } from "../../design-system";
 import { ITask } from "../../interfaces/task.ts";
-import { addTask } from "../../services/request";
+import { addTask } from "../../services/request.js";
 
 interface IModal {
     handleModal: () => void;
@@ -50,7 +50,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
         } else if (!error) {
             addTask(modalValue)
                 .catch()
-                .then((response) => {
+                .then((response: any) => {
                     dummyUpdate(response.data);
                 })
                 .finally(() => {

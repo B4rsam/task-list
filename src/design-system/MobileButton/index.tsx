@@ -8,7 +8,7 @@ import DoneIcon from '@mui/icons-material/Done';
 interface IMobileButton {
     type: MainButtonTypes;
     status?: boolean;
-    onClick: (any) => void;
+    onClick: () => void;
 }
 const MobileButton: FC<IMobileButton> = ({ type, status, onClick }) => {
     switch(type) {

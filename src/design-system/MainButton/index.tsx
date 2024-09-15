@@ -8,7 +8,7 @@ interface ITaskButton {
     type: MainButtonTypes;
     content?: string;
     status?: boolean;
-    onClick: (any) => void;
+    onClick: () => void;
     disabled?: boolean;
 }
 const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, onClick }) => {
@@ -17,7 +17,6 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, 
             return (
                 <Button
                     variant="contained"
-                    type="text"
                     disabled={disabled}
                     startIcon=""
                     onClick={onClick}
@@ -62,7 +61,6 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, 
             return (
                 <Button
                     variant="contained"
-                    type="text"
                     startIcon=""
                     onClick={onClick}
                     sx={{

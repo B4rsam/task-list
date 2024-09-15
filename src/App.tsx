@@ -6,7 +6,7 @@ import {MainButton, MobileButton} from "./design-system";
 import {createContext, useState} from "react";
 import useViewController from "./utils/useViewController.tsx";
 
-export const TaskProvider = createContext();
+export const TaskProvider = createContext({});
 
 function App() {
     const [showModal, setShowModal] = useState<boolean>(false);

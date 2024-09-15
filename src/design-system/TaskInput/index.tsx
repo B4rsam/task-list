@@ -13,7 +13,6 @@ const TaskInput: FC<ITextField> = ({ label, onChange, value = "" }) => {
             value={value}
             variant="outlined"
             placeholder={label}
-            maxLength={128}
             fullWidth
             sx={{
                 borderRadius: "10px",

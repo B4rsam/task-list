@@ -1,4 +1,4 @@
-import {getTasks, deleteTask, editTask} from "../services/request.js";
+import { getTasks, deleteTask, editTask } from "../services/request.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TaskCard from "../components/TaskCard";
 import { ITask } from "../interfaces/task.ts";
@@ -10,12 +10,12 @@ const useViewController = () => {
 
     const handleUpdate = () => {
         setLoading(true);
-        getTasks().then((data) => {
+        getTasks().then((data: any) => {
             setLoading(false);
             setTasks(data.data.todos)});
     };
 
-    const getTaskData = (id) => {
+    const getTaskData = (id: number) => {
         const tasks = new Map();
         task.forEach((item) => {
             tasks.set(item.id, item);
@@ -23,7 +23,7 @@ const useViewController = () => {
         return tasks.get(id);
     };
 
-    const dummyUpdate = (inTask) => {
+    const dummyUpdate = (inTask: ITask) => {
         const newData = [
             ...task,
             {
@@ -34,8 +34,8 @@ const useViewController = () => {
         setTasks(newData);
     };
 
-    const dummyEdit = (id, data) => {
-        editTask(id, data.todo).then((response) => {
+    const dummyEdit = (id: number, data: Partial<ITask>) => {
+        editTask(id, data.todo).then((response: any) => {
             const filteredItem = task.filter((item) => item.id !== response.data.id);
             setTasks([
                 ...filteredItem,
@@ -44,7 +44,7 @@ const useViewController = () => {
         })
     };
 
-    const handleDeletion = (id, skip = false) => {
+    const handleDeletion = (id: number, skip = false) => {
         if (skip) {
             deleteTask(id).then(() => {
                 const filteredItem = task.filter((task) => task.id !== id);

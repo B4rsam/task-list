@@ -3,5 +3,10 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "es5", "es2015"],
+    "allowJs": true,
+    "target": "es5",
+  }
 }

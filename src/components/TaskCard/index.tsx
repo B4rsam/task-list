@@ -4,7 +4,7 @@ import AuxButton from "../../design-system/AuxButton";
 import colorPalette from "../../constants/colorPalette.ts";
 import { MainButton, MobileButton } from "../../design-system";
 import {TaskProvider} from "../../App.tsx";
-import { editStatus } from "../../services/request";
+import { editStatus } from "../../services/request.js";
 import { isMobile } from "../../utils/isMobile.ts";
 import EditModal from "../EditModal";
 
