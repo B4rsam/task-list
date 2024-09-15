@@ -16,7 +16,8 @@ function App() {
     const {
         taskList,
         details,
-        isLoading
+        isLoading,
+        dummyUpdate,
     } = useViewController();
 
   return (
@@ -53,7 +54,7 @@ function App() {
                 >
                     Task List
                 </Typography>
-                <TaskModal handleModal={handleModal} state={showModal}/>
+                <TaskModal handleModal={handleModal} state={showModal} dummyUpdate={dummyUpdate}/>
                 {!isMobile ? <MainButton type="addButton" content="Add Task" onClick={handleModal}/> : <MobileButton type="addButton" onClick={handleModal}/>}
             </Box>
             {isMobile ? <Box sx={{ height: "32px" }}/> : null}

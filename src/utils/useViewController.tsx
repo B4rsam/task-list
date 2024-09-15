@@ -45,7 +45,6 @@ const useViewController = () => {
     };
 
     const handleDeletion = (id, skip = false) => {
-        console.log(task)
         if (skip) {
             deleteTask(id).then(() => {
                 const filteredItem = task.filter((task) => task.id !== id);
@@ -64,9 +63,7 @@ const useViewController = () => {
     const taskList = useMemo(() => task.map(({ id }) => <TaskCard id={id} key={id} />), [taskIds]);
 
     useEffect(() => {
-        console.log("b")
         if (firstRun.current) {
-            console.log(firstRun.current);
             handleUpdate();
             firstRun.current = false;
         }

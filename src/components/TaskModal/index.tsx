@@ -4,23 +4,20 @@ import colorPalette from "../../constants/colorPalette.ts";
 import { AuxButton, MainButton, TaskInput } from "../../design-system";
 import { ITask } from "../../interfaces/task.ts";
 import { addTask } from "../../services/request";
-import useViewController from "../../utils/useViewController.tsx";
 
 interface IModal {
     handleModal: () => void;
     state: boolean;
+    dummyUpdate: (inTask: ITask) => void;
 }
 
-const TaskModal: FC<IModal> = ({ handleModal, state }) => {
+const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
     const [isComplete, setComplete] = useState<boolean>(false);
     const INITIAL_STATE = {
         todo: undefined,
         completed: isComplete,
     };
     const [modalValue, setValue] = useState<Partial<ITask>>(INITIAL_STATE);
-    const {
-        dummyUpdate,
-    } = useViewController();
     const [error, setError] = useState<boolean>(modalValue.todo === undefined || modalValue.todo === "");
     const handleInput = (func: 0 | 1, value: undefined | boolean | string) => {
         switch(func) {
