@@ -53,8 +53,8 @@ const TaskModal: FC<IModal> = ({ handleModal, state }) => {
         } else if (!error) {
             addTask(modalValue)
                 .catch()
-                .then(() => {
-                    dummyUpdate(modalValue);
+                .then((response) => {
+                    dummyUpdate(response.data);
                 })
                 .finally(() => {
                     setComplete(false);

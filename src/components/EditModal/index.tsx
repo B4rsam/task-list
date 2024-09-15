@@ -3,21 +3,17 @@ import { FC, useState } from "react";
 import colorPalette from "../../constants/colorPalette.ts";
 import { AuxButton, MainButton, TaskInput } from "../../design-system";
 import { ITask } from "../../interfaces/task.ts";
-import { addTask } from "../../services/request";
-import useViewController from "../../utils/useViewController.tsx";
 
 interface IModal {
     handleModal: () => void;
     state: boolean;
     taskData: ITask;
+    dummyEdit: (id: number, data: any) => void;
 }
 
-const EditModal: FC<IModal> = ({ handleModal, state, taskData }) => {
+const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
     const [isComplete, setComplete] = useState<boolean>(false);
     const [modalValue, setValue] = useState<Partial<ITask>>(taskData);
-    const {
-        dummyUpdate,
-    } = useViewController();
     const [error, setError] = useState<boolean>(modalValue.todo === undefined || modalValue.todo === "");
     const handleClose = () => {
         setValue(taskData);
@@ -54,15 +50,9 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData }) => {
         if (modalValue.todo === "" || modalValue.todo === undefined) {
             setError(true);
         } else if (!error) {
-            addTask(modalValue)
-                .catch()
-                .then(() => {
-                    dummyUpdate(modalValue);
-                })
-                .finally(() => {
-                    setError(false);
-                    handleModal();
-                });
+            dummyEdit(taskData.id, modalValue as ITask);
+            setError(false);
+            handleModal();
         }
     };
 

@@ -3,17 +3,16 @@ import { FC, useContext, useState } from "react";
 import AuxButton from "../../design-system/AuxButton";
 import colorPalette from "../../constants/colorPalette.ts";
 import { MainButton, MobileButton } from "../../design-system";
-import { TaskProvider } from "../MainContainer";
+import {TaskProvider} from "../../App.tsx";
 import { editStatus } from "../../services/request";
 import { isMobile } from "../../utils/isMobile.ts";
 import EditModal from "../EditModal";
 
 interface ITaskCard {
     id: number;
-    onEdit: (id: number, text: string) => void;
 }
-const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
-    const { getTaskData, handleDeletion } = useContext(TaskProvider);
+const TaskCard: FC<ITaskCard> = ({ id }) => {
+    const { getTaskData, handleDeletion, dummyEdit } = useContext(TaskProvider);
     const taskData = getTaskData(id);
     const [status, setStatus] = useState<boolean>(taskData.completed);
     const [modal, setModal] = useState<boolean>(false);
@@ -63,7 +62,7 @@ const TaskCard: FC<ITaskCard> = ({ id, onEdit }) => {
                         display: "flex",
                     }}
                 >
-                    <EditModal handleModal={handleModal} state={modal} taskData={taskData} />
+                    <EditModal handleModal={handleModal} state={modal} taskData={taskData} dummyEdit={dummyEdit} />
                     <AuxButton type="editButton" onClick={handleModal} id={taskData.id} />
                     <AuxButton type="deleteButton" onClick={handleDeletion} id={taskData.id} />
                     {!isMobile ? <MainButton type="complete" content="Completed" status={status} onClick={() => handleCompletion(taskData.id)} /> : <MobileButton type="complete" status={status} onClick={() => handleCompletion(taskData.id)} />}

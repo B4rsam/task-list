@@ -1,4 +1,4 @@
-import { getTasks, addTask, deleteTask } from "../services/request.js";
+import {getTasks, deleteTask, editTask} from "../services/request.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TaskCard from "../components/TaskCard";
 import { ITask } from "../interfaces/task.ts";
@@ -10,7 +10,7 @@ const useViewController = () => {
 
     const handleUpdate = () => {
         setLoading(true);
-        getTasks().catch().then((data) => {
+        getTasks().then((data) => {
             setLoading(false);
             setTasks(data.data.todos)});
     };
@@ -24,30 +24,34 @@ const useViewController = () => {
     };
 
     const dummyUpdate = (inTask) => {
-        inTask = {
-            ...inTask,
-            id: task.length+1,
-        };
-        setTasks(task.concat(inTask));
+        const newData = [
+            ...task,
+            {
+                ...inTask,
+                id: task.length + 1,
+            },
+        ];
+        setTasks(newData);
     };
 
-    const dummyEdit = (id, text) => {
-        const temp = {
-            ...task[id],
-            todo: text,
-        };
-        //change this
-        deleteTask(id).then(() => {
-            handleDeletion(id);
-        }).then(() => {
-            addTask(temp).then(() => {
-                dummyUpdate(temp);
+    const dummyEdit = (id, data) => {
+        editTask(id, data.todo).then((response) => {
+            const filteredItem = task.filter((item) => item.id !== response.data.id);
+            setTasks([
+                ...filteredItem,
+                response.data,
+            ]);
+        })
+    };
+
+    const handleDeletion = (id, skip = false) => {
+        console.log(task)
+        if (skip) {
+            deleteTask(id).then(() => {
+                const filteredItem = task.filter((task) => task.id !== id);
+                setTasks(filteredItem);
             });
-        });
-    };
-
-    const handleDeletion = (id) => {
-        if (confirm("Are you sure you wish to delete this task?")) {
+        } else if (confirm("Are you sure you wish to delete this task?")) {
             deleteTask(id).then(() => {
                 const filteredItem = task.filter((task) => task.id !== id);
                 setTasks(filteredItem);
@@ -55,12 +59,14 @@ const useViewController = () => {
         }
     };
 
-    const details = useMemo(() => ({ getTaskData, handleDeletion }), [task]);
-    const taskIds = useMemo(() => task.map(({id}) => id), [task]);
-    const taskList = useMemo(() => taskIds.map((id) => <TaskCard id={id} key={id} onEdit={dummyEdit} />), [taskIds]);
+    const details = useMemo(() => ({ getTaskData, handleDeletion, dummyEdit }), [task]);
+    const taskIds = useMemo(() => task.map((item) => item.id), [task]);
+    const taskList = useMemo(() => task.map(({ id }) => <TaskCard id={id} key={id} />), [taskIds]);
 
     useEffect(() => {
+        console.log("b")
         if (firstRun.current) {
+            console.log(firstRun.current);
             handleUpdate();
             firstRun.current = false;
         }
@@ -71,6 +77,7 @@ const useViewController = () => {
         details,
         dummyUpdate,
         isLoading,
+        dummyEdit,
     };
 };
 
