@@ -1,7 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "../../constants/colorPalette.ts";
-import { AuxButton, MainButton, TaskInput } from "../../design-system";
+import {AuxButton, MainButton, TextAreaCustom} from "../../design-system";
 import { ITask } from "../../interfaces/task.ts";
 
 interface IModal {
@@ -62,15 +62,20 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
             onClose={handleClose}
             sx={{
                 zIndex: "4501",
+                paddingInline: "16px",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
             }}
         >
             <Box
                 sx={{
-                    width: "256px",
+                    maxWidth: "512px",
+                    width: "100%",
                     backgroundColor: colorPalette.component.secondary.background,
                     borderRadius: "8px",
                     marginTop: "24vh",
-                    marginInline: "auto",
+                    marginInline: "16px",
                     padding: "8px",
                     display: "flex",
                     flexDirection: "column",
@@ -106,13 +111,12 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
                         alignItems: "center",
                     }}
                 >
-                    <TaskInput label="Todo" value={modalValue.todo} onChange={(e) => handleInput(0, e.target.value)} />
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e) => handleInput(0, e.target.value)} value={taskData.todo}/>
                     <Box
                         sx={{
                             marginBlock: "4px",
                         }}
                     />
-                    <MainButton type="complete" onClick={() => handleInput(1, undefined)} status={isComplete} />
                 </Box>
                 <MainButton type="submit" content="Submit" onClick={handleSubmit} disabled={error} />
             </Box>
