@@ -1,9 +1,9 @@
 import {isMobile} from "./utils/isMobile.ts";
 import colorPalette from "./constants/colorPalette.ts";
-import {Box, Container, Typography} from "@mui/material";
-import TaskModal from "./components/TaskModal";
-import {MainButton, MobileButton} from "./design-system";
-import {createContext, useState} from "react";
+import { Box, Container, Typography } from "@mui/material";
+import { TaskModal } from "./components";
+import { MainButton, MobileButton } from "./design-system";
+import { createContext, useState } from "react";
 import useViewController from "./utils/useViewController.tsx";
 
 export const TaskProvider = createContext({});

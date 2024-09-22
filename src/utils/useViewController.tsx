@@ -1,7 +1,7 @@
-import { getTasks, deleteTask, editTask } from "../services/request.js";
+import { getTasks, deleteTask, editTask } from "@/services/request.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import TaskCard from "../components/TaskCard";
-import { ITask } from "../interfaces/task.ts";
+import { TaskCard } from "@/components";
+import { ITask } from "@/interfaces/task.ts";
 
 const useViewController = () => {
     const firstRun = useRef(true);
@@ -45,12 +45,7 @@ const useViewController = () => {
     };
 
     const handleDeletion = (id: number, skip = false) => {
-        if (skip) {
-            deleteTask(id).then(() => {
-                const filteredItem = task.filter((task) => task.id !== id);
-                setTasks(filteredItem);
-            });
-        } else if (confirm("Are you sure you wish to delete this task?")) {
+        if (skip || confirm("Are you sure you wish to delete this task?")) {
             deleteTask(id).then(() => {
                 const filteredItem = task.filter((task) => task.id !== id);
                 setTasks(filteredItem);

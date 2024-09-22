@@ -1,12 +1,12 @@
 import { Box, Card, Typography } from "@mui/material";
 import { FC, useContext, useState } from "react";
-import AuxButton from "../../design-system/AuxButton";
-import colorPalette from "../../constants/colorPalette.ts";
-import { MainButton, MobileButton } from "../../design-system";
-import {TaskProvider} from "../../App.tsx";
-import { editStatus } from "../../services/request.js";
-import { isMobile } from "../../utils/isMobile.ts";
-import EditModal from "../EditModal";
+import AuxButton from "@/design-system/AuxButton";
+import colorPalette from "@/constants/colorPalette.ts";
+import { MainButton, MobileButton } from "@/design-system";
+import { TaskProvider } from "@/App.tsx";
+import { editStatus } from "@/services/request.js";
+import { isMobile } from "@/utils/isMobile.ts";
+import { EditModal } from "../";
 
 interface ITaskCard {
     id: number;

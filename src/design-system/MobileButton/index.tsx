@@ -1,7 +1,7 @@
-import {MainButtonTypes} from "../../interfaces/buttons.ts";
-import {FC} from "react";
+import { MainButtonTypes } from "@/interfaces/buttons.ts";
+import { FC } from "react";
 import { IconButton } from "@mui/material";
-import colorPalette from "../../constants/colorPalette.ts";
+import colorPalette from "@/constants/colorPalette.ts";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from '@mui/icons-material/Done';
 

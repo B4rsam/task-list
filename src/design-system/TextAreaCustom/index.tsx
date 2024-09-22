@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import s from "./textarea.module.css";
 import { FC } from "react";
-import { isMobile } from "../../utils/isMobile.ts";
+import { isMobile } from "@/utils/isMobile.ts";
 interface ITextArea {
     placeHolder: string;
     onChange: (e: any) => void;

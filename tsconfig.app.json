@@ -5,6 +5,9 @@
     "lib": ["dom", "dom.iterable", "es5", "es2015"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "paths": {
+      "@/": ["./src/*"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

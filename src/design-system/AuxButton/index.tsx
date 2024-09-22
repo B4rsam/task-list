@@ -1,11 +1,11 @@
-import { AuxButtonTypes } from "../../interfaces/buttons.ts";
+import { AuxButtonTypes } from "@/interfaces/buttons.ts";
 import { FC } from "react";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from '@mui/icons-material/Close';
-import colorPalette from "../../constants/colorPalette.ts";
-import { isMobile } from "../../utils/isMobile.ts";
+import colorPalette from "@/constants/colorPalette.ts";
+import { isMobile } from "@/utils/isMobile.ts";
 
 interface IAuxButton {
     type: AuxButtonTypes;
