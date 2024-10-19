@@ -23,6 +23,7 @@
     "tspath": "^2.6.8"
   },
   "devDependencies": {
+    "@types/node": "^22.7.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/web": "^0.0.163",

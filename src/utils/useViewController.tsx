@@ -35,7 +35,7 @@ const useViewController = () => {
     };
 
     const dummyEdit = (id: number, data: Partial<ITask>) => {
-        editTask(id, data.todo).then((response: any) => {
+        editTask(id, data.body).then((response: any) => {
             const filteredItem = task.filter((item) => item.id !== response.data.id);
             setTasks([
                 ...filteredItem,
