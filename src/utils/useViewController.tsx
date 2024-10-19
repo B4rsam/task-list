@@ -1,5 +1,5 @@
 import { getTasks, deleteTask, editTask } from "@/services/request.js";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {ReactNode, useEffect, useMemo, useRef, useState} from "react";
 import { TaskCard } from "@/components";
 import { ITask } from "@/interfaces/task.ts";
 
@@ -55,7 +55,29 @@ const useViewController = () => {
 
     const details = useMemo(() => ({ getTaskData, handleDeletion, dummyEdit }), [task]);
     const taskIds = useMemo(() => task.map((item) => item.id), [task]);
-    const taskList = useMemo(() => task.map(({ id }) => <TaskCard id={id} key={id} />), [taskIds]);
+    const taskList = useMemo(() => {
+        const list = {
+            high: [] as ReactNode[],
+            normal: [] as ReactNode[],
+            low: [] as ReactNode[],
+        };
+        task.forEach(({ id, priority}) => {
+            switch (priority) {
+                case 1:
+                    list.high.push(<TaskCard id={id} />);
+                    break;
+                case 2:
+                    list.low.push(<TaskCard id={id} />);
+                    break;
+                case 0:
+                default:
+                    list.normal.push(<TaskCard id={id} />);
+                    break;
+
+            }
+        });
+        return list;
+    }, [taskIds]);
 
     useEffect(() => {
         if (firstRun.current) {

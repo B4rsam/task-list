@@ -15,7 +15,6 @@ const colorPalette = {
     },
     priority: {
         high: "rgb(255, 40, 40)",
-        medium: "rgb(255, 255, 40)",
         low: "rgb(40, 255, 40)",
         none: "rgba(0,0,0,0)",
     },

@@ -4,6 +4,7 @@ import colorPalette from "@/constants/colorPalette.ts";
 import { AuxButton, MainButton, TextAreaCustom } from "@/design-system";
 import { ITask } from "@/interfaces/task.ts";
 import { addTask } from "@/services/request.js";
+import { PrioritySelector } from "@/components";
 
 interface IModal {
     handleModal: () => void;
@@ -12,40 +13,25 @@ interface IModal {
 }
 
 const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
-    const [isComplete, setComplete] = useState<boolean>(false);
     const INITIAL_STATE = {
-        todo: undefined,
-        completed: isComplete,
+        body: undefined,
     };
     const [modalValue, setValue] = useState<Partial<ITask>>(INITIAL_STATE);
-    const [error, setError] = useState<boolean>(modalValue.todo === undefined || modalValue.todo === "");
-    const handleInput = (func: 0 | 1, value: undefined | boolean | string) => {
-        switch(func) {
-            case 0:
-                setValue({
-                    ...modalValue,
-                    todo: value as string,
-                });
-                if (value === "") {
-                    setError(true);
-                } else {
-                    setError(false);
-                }
-                break;
-            case 1:
-                setValue({
-                    ...modalValue,
-                    completed: !isComplete,
-                });
-                setComplete(!isComplete);
-                break;
-            default:
-                break;
+    const [error, setError] = useState<boolean>(modalValue.body === undefined || modalValue.body === "");
+    const handleInput = (value: undefined | string) => {
+        setValue({
+            ...modalValue,
+            body: value as string,
+        });
+        if (value === "") {
+            setError(true);
+        } else {
+            setError(false);
         }
     };
 
     const handleSubmit = () => {
-        if (modalValue.todo === "" || modalValue.todo === undefined) {
+        if (modalValue.body === "" || modalValue.body === undefined) {
             setError(true);
         } else if (!error) {
             addTask(modalValue)
@@ -54,7 +40,6 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                     dummyUpdate(response.data);
                 })
                 .finally(() => {
-                    setComplete(false);
                     setValue(INITIAL_STATE);
                     setError(false);
                     handleModal();
@@ -117,13 +102,13 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                         alignItems: "center",
                     }}
                 >
-                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(0, e.target.value)}/>
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(e.target.value)}/>
                     <Box
                         sx={{
-                            marginBlock: "4px",
+                            marginBlock: "8px",
                         }}
                     />
-                    {/*<MainButton type="complete" onClick={() => handleInput(1, undefined)} status={isComplete} />*/}
+                    <PrioritySelector />
                 </Box>
                 <MainButton type="submit" content="Submit" onClick={handleSubmit} disabled={error} />
             </Box>

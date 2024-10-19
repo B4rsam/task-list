@@ -1,4 +1,4 @@
-export type priorities = 1 | 2 | 3;
+export type priorities = 0 | 1 | 2;
 export type validStatus = "ongoing" | "complete";
 
 export interface ITask {

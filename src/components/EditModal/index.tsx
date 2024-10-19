@@ -3,6 +3,7 @@ import { FC, useState } from "react";
 import colorPalette from "@/constants/colorPalette.ts";
 import {AuxButton, MainButton, TextAreaCustom} from '@/design-system';
 import { ITask } from "@/interfaces/task.ts";
+import { PrioritySelector } from "@/components";
 
 interface IModal {
     handleModal: () => void;
@@ -12,42 +13,27 @@ interface IModal {
 }
 
 const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
-    const [isComplete, setComplete] = useState<boolean>(false);
     const [modalValue, setValue] = useState<Partial<ITask>>(taskData);
-    const [error, setError] = useState<boolean>(modalValue.todo === undefined || modalValue.todo === "");
+    const [error, setError] = useState<boolean>(modalValue.body === undefined || modalValue.body === "");
     const handleClose = () => {
         setValue(taskData);
-        setComplete(taskData.completed);
         setError(false);
         handleModal();
     };
-    const handleInput = (func: 0 | 1, value: undefined | boolean | string) => {
-        switch(func) {
-            case 0:
-                setValue({
-                    ...modalValue,
-                    todo: value as string,
-                });
-                if (value === "") {
-                    setError(true);
-                } else {
-                    setError(false);
-                }
-                break;
-            case 1:
-                setValue({
-                    ...modalValue,
-                    completed: !isComplete,
-                });
-                setComplete(!isComplete);
-                break;
-            default:
-                break;
+    const handleInput = (value: undefined | string) => {
+        setValue({
+            ...modalValue,
+            body: value as string,
+        });
+        if (value === "") {
+            setError(true);
+        } else {
+            setError(false);
         }
     };
 
     const handleSubmit = () => {
-        if (modalValue.todo === "" || modalValue.todo === undefined) {
+        if (modalValue.body === "" || modalValue.body === undefined) {
             setError(true);
         } else if (!error) {
             dummyEdit(taskData.id, modalValue as ITask);
@@ -108,15 +94,15 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
                         marginBottom: "32px",
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
                     }}
                 >
-                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(0, e.target.value)} value={taskData.todo}/>
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(e.target.value)} value={taskData.body}/>
                     <Box
                         sx={{
-                            marginBlock: "4px",
+                            marginBlock: "8px",
                         }}
                     />
+                    <PrioritySelector />
                 </Box>
                 <MainButton type="submit" content="Submit" onClick={handleSubmit} disabled={error} />
             </Box>

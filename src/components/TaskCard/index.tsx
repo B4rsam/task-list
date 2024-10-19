@@ -32,8 +32,6 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
             case 1:
                 return colorPalette.priority.high;
             case 2:
-                return colorPalette.priority.medium;
-            case 3:
                 return colorPalette.priority.low;
             case 0:
             default:

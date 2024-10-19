@@ -20,6 +20,32 @@ function App() {
         dummyUpdate,
     } = useViewController();
 
+    const handleTasks = () => {
+        return (
+            <>
+                {taskList.high &&
+                    <Box sx={{
+                        marginBottom: "32px",
+                    }}>
+                        {taskList.high}
+                    </Box>
+                }
+                {taskList.normal &&
+                    <Box>
+                        {taskList.normal}
+                    </Box>
+                }
+                {taskList.low &&
+                    <Box sx={{
+                        marginTop: "32px",
+                    }}>
+                        {taskList.low}
+                    </Box>
+                }
+            </>
+        );
+    };
+
   return (
     <>
         <Container sx={{
@@ -60,7 +86,7 @@ function App() {
             {isMobile ? <Box sx={{ height: "32px" }}/> : null}
             <TaskProvider.Provider value={details}>
                 {!isLoading ?
-                    taskList :
+                    handleTasks() :
                     <Typography
                         sx={{
                             fontWeight: "bold",
