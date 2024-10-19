@@ -16,7 +16,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
     // @ts-ignore
     const { getTaskData, handleDeletion, dummyEdit } = useContext(TaskProvider);
     const taskData = getTaskData(id);
-    const [status, setStatus] = useState<boolean>(taskData.completed);
+    const [status, setStatus] = useState<boolean>(taskData.status === "complete");
     const [modal, setModal] = useState<boolean>(false);
 
     const handleCompletion = (id: number) => {
