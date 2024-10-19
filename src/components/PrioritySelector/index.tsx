@@ -25,9 +25,6 @@ const PrioritySelector = () => {
                 <ToggleButton value={3}>
                     Low
                 </ToggleButton>
-                <ToggleButton value={2}>
-                    Medium
-                </ToggleButton>
                 <ToggleButton value={1}>
                     High
                 </ToggleButton>

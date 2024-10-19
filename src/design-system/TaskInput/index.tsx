@@ -5,14 +5,16 @@ interface ITextField {
     label: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
+    type: string;
 }
-const TaskInput: FC<ITextField> = ({ label, onChange, value = "" }) => {
+const TaskInput: FC<ITextField> = ({ label, onChange, value = "", type }) => {
     return (
         <TextField
             onChange={onChange}
             value={value}
             variant="outlined"
             placeholder={label}
+            type={type}
             fullWidth
             sx={{
                 borderRadius: "10px",

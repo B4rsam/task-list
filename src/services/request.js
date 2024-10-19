@@ -28,4 +28,8 @@ function editTask(id, text) {
     });
 }
 
-export { getTasks, deleteTask, addTask, editStatus, editTask };
+function userAuth(userData) {
+    return apiInstance.put(`/user/login`, userData);
+}
+
+export { getTasks, deleteTask, addTask, editStatus, editTask, userAuth };

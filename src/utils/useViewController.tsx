@@ -1,5 +1,5 @@
 import { getTasks, deleteTask, editTask } from "@/services/request.js";
-import {ReactNode, useEffect, useMemo, useRef, useState} from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { TaskCard } from "@/components";
 import { ITask } from "@/interfaces/task.ts";
 

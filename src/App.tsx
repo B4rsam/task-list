@@ -1,7 +1,7 @@
-import {isMobile} from "./utils/isMobile.ts";
+import { isMobile } from "./utils/isMobile.ts";
 import colorPalette from "./constants/colorPalette.ts";
 import { Box, Container, Typography } from "@mui/material";
-import { TaskModal } from "./components";
+import { TaskModal, UserModal } from "./components";
 import { MainButton, MobileButton } from "./design-system";
 import { createContext, useState } from "react";
 import useViewController from "./utils/useViewController.tsx";
@@ -10,9 +10,13 @@ export const TaskProvider = createContext({});
 
 function App() {
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showUserModal, setUserModal] = useState<boolean>(true);
     const handleModal = () => {
         setShowModal(!showModal);
-    }
+    };
+    const handleUserModal = () => {
+        setUserModal(!showUserModal);
+    };
     const {
         taskList,
         details,
@@ -48,6 +52,7 @@ function App() {
 
   return (
     <>
+        <UserModal handleModal={handleUserModal} state={showUserModal} />
         <Container sx={{
             backgroundColor: `${!isMobile ? colorPalette.component.main.background : "rgba(0,0,0,0)"}`,
             maxWidth: "600px",
