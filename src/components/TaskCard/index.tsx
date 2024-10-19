@@ -27,19 +27,45 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
         setModal(!modal);
     };
 
+    const handlePriority = () => {
+        switch(taskData.priority) {
+            case 1:
+                return colorPalette.priority.high;
+            case 2:
+                return colorPalette.priority.medium;
+            case 3:
+                return colorPalette.priority.low;
+            case 0:
+            default:
+                return colorPalette.priority.none;
+        }
+    };
+
     return (
         <Card
             id={taskData.id as string}
             sx={{
-                paddingBlock: "8px",
-                paddingInline: "16px",
+                paddingRight: "16px",
                 borderRadius: "8px",
                 border: `solid 1px ${colorPalette.component.secondary.border}`,
                 backgroundColor: `${!isMobile ? colorPalette.component.secondary.background : colorPalette.component.main.background}`,
                 marginBottom: "8px",
             }}
         >
-            {taskData.title &&
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                }}
+            >
+                <Box
+                    sx={{
+                        backgroundColor: handlePriority(),
+                        width: "8px",
+                        height: "60px",
+                        marginRight: "8px",
+                    }}
+                />
                 <Typography
                     variant="body2"
                     color="textSecondary"
@@ -49,27 +75,8 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         textOverflow: "ellipsis",
                         whiteSpace: "normal",
                         fontWeight : `${!isMobile ? "normal" : "bold"}`,
-                        marginBottom: "8px",
-                    }}
-                >
-                    {taskData.title}
-                </Typography>
-            }
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                }}
-            >
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{
-                        color: colorPalette.textContent.taskContent,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "normal",
-                        fontWeight : `${!isMobile ? "normal" : "bold"}`
+                        textAlign: "left",
+                        marginBlock: "8px",
                     }}
                 >
                     {taskData.body}
@@ -78,6 +85,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                     sx={{
                         alignItems: "flex-end",
                         display: "flex",
+                        marginBlock: "8px",
                     }}
                 >
                     <EditModal handleModal={handleModal} state={modal} taskData={taskData} dummyEdit={dummyEdit} />

@@ -4,7 +4,6 @@ export type validStatus = "ongoing" | "complete";
 export interface ITask {
     id: number;
     userId: number;
-    title?: string;
     body: string;
     priority?: priorities | 0;
     status: validStatus;

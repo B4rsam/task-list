@@ -13,6 +13,12 @@ const colorPalette = {
         taskContent: "hsl(0, 0%, 100%)",
         icon: "hsl(6, 70%, 34%)",
     },
+    priority: {
+        high: "rgb(255, 40, 40)",
+        medium: "rgb(255, 255, 40)",
+        low: "rgb(40, 255, 40)",
+        none: "rgba(0,0,0,0)",
+    },
     component: {
         page: {
             background: "hsl(222, 26%, 31%)",
