@@ -1,7 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "@/constants/colorPalette.ts";
-import {AuxButton, MainButton, TextAreaCustom} from "@/design-system";
+import {AuxButton, MainButton, TextAreaCustom} from '@/design-system';
 import { ITask } from "@/interfaces/task.ts";
 
 interface IModal {
@@ -111,7 +111,7 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
                         alignItems: "center",
                     }}
                 >
-                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e) => handleInput(0, e.target.value)} value={taskData.todo}/>
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(0, e.target.value)} value={taskData.todo}/>
                     <Box
                         sx={{
                             marginBlock: "4px",

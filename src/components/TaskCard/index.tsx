@@ -1,5 +1,6 @@
 import { Box, Card, Typography } from "@mui/material";
 import { FC, useContext, useState } from "react";
+// @ts-ignore
 import AuxButton from "@/design-system/AuxButton";
 import colorPalette from "@/constants/colorPalette.ts";
 import { MainButton, MobileButton } from "@/design-system";
@@ -12,6 +13,7 @@ interface ITaskCard {
     id: number;
 }
 const TaskCard: FC<ITaskCard> = ({ id }) => {
+    // @ts-ignore
     const { getTaskData, handleDeletion, dummyEdit } = useContext(TaskProvider);
     const taskData = getTaskData(id);
     const [status, setStatus] = useState<boolean>(taskData.completed);
@@ -37,6 +39,22 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                 marginBottom: "8px",
             }}
         >
+            {taskData.title &&
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    sx={{
+                        color: colorPalette.textContent.taskContent,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "normal",
+                        fontWeight : `${!isMobile ? "normal" : "bold"}`,
+                        marginBottom: "8px",
+                    }}
+                >
+                    {taskData.title}
+                </Typography>
+            }
             <Box
                 sx={{
                     display: "flex",
@@ -54,7 +72,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         fontWeight : `${!isMobile ? "normal" : "bold"}`
                     }}
                 >
-                    {taskData.todo}
+                    {taskData.body}
                 </Typography>
                 <Box
                     sx={{

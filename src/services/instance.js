@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from "axios";
 
 const apiInstance = axios.create({
-    baseURL: "https://dummyjson.com/todos"
-})
+    baseURL: "http://localhost:3000/task",
+});
 
 export default apiInstance;

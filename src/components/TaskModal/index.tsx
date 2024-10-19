@@ -117,7 +117,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                         alignItems: "center",
                     }}
                 >
-                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e) => handleInput(0, e.target.value)}/>
+                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(0, e.target.value)}/>
                     <Box
                         sx={{
                             marginBlock: "4px",

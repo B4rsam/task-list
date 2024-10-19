@@ -12,7 +12,7 @@ const useViewController = () => {
         setLoading(true);
         getTasks().then((data: any) => {
             setLoading(false);
-            setTasks(data.data.todos)});
+            setTasks(data.data.data)});
     };
 
     const getTaskData = (id: number) => {

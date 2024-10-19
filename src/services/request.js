@@ -5,26 +5,26 @@ const getTasks = async () => {
 }
 
 function deleteTask(id) {
-    return apiInstance.delete(`/${id}`);
+    return apiInstance.delete(`/${id}/delete`);
 }
 
 function addTask(task) {
     return apiInstance.post("/add", {
-        todo: task.todo,
+        body: task.todo,
         completed: task.completed,
         userId: 1,
     });
 }
 
 function editStatus(id, status) {
-    return apiInstance.put(`/${id}`, {
-        completed: status,
+    return apiInstance.put(`/${id}/update`, {
+        status: status ? "complete" : "ongoing",
     });
 }
 
 function editTask(id, text) {
-    return apiInstance.put(`/${id}`, {
-        todo: text,
+    return apiInstance.put(`/${id}/edit`, {
+        body: text,
     });
 }
 
