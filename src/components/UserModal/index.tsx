@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TaskInput } from "../../design-system";
 // @ts-ignore
-import { userAuth } from "@/services/request";
+import { userLogin } from "@/services/auth";
 
 interface IUserModal {
     state: boolean;
@@ -44,7 +44,7 @@ const UserModal: FC<IUserModal> = ({ state, handleModal }) => {
     const handleSubmit = () => {
         console.log(modalValue);
         if (!error) {
-            userAuth(modalValue).finally(() => {
+            userLogin(modalValue).finally(() => {
                 setValue(INITIAL_STATE);
                 setError(true);
                 handleModal();

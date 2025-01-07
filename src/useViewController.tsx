@@ -1,88 +1,28 @@
 // @ts-ignore
-import { getTasks, deleteTask, editTask, addTask } from "@/services/request.js";
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { TaskCard } from "@/components";
-import { ITask } from "@/interfaces/task.ts";
+import { tokenAuth } from "@/services/auth.ts";
+import { useEffect, useRef, useState } from "react";
 
 const useViewController = () => {
-    const firstRun = useRef(true);
-    const [task, setTasks] = useState<ITask[]>([]);
-    const [isLoading, setLoading] = useState(true);
-
-    const handleUpdate = () => {
-        getTasks().then((res: any) => {
-            setTasks(res.data.data);
-            setLoading(false);
-        });
-    };
-
-    const getTaskData = (id: number) => {
-        const tasks = new Map();
-        task.forEach((item) => {
-            tasks.set(item.id, item);
-        });
-        return tasks.get(id);
-    };
-
-    const dummyUpdate = (inTask: Partial<ITask>) => {
-        addTask(inTask).then((response: ITask) => {
-            setTasks((prev) => ({
-                ...prev,
-                response,
-            }));
-        });
-    };
-
-    const dummyEdit = (id: number, data: Partial<ITask>) => {
-        editTask(id, data).then((response: ITask) => {
-            setTasks(task.filter(({ id }) => id !== response.id).concat(response));
-        });
-    };
-
-    const handleDeletion = (tid: number) => {
-        deleteTask(tid).then(() => {
-            setTasks(task.filter(({ id }) => id !== tid));
-        });
-    };
-
-    const details = useMemo(() => ({ getTaskData, handleDeletion, dummyEdit }), [task]);
-    const taskIds = useMemo(() => task.map((item) => item.id), [task]);
-    const taskList = useMemo(() => {
-        const list = {
-            high: [] as ReactNode[],
-            normal: [] as ReactNode[],
-            low: [] as ReactNode[],
-        };
-        task.forEach(({ id, priority }) => {
-            switch (priority) {
-                case 1:
-                    list.high.push(<TaskCard id={id} />);
-                    break;
-                case 2:
-                    list.low.push(<TaskCard id={id} />);
-                    break;
-                case 0:
-                default:
-                    list.normal.push(<TaskCard id={id} />);
-                    break;
-            }
-        });
-        return list;
-    }, [taskIds]);
+    const firstRun = useRef<boolean>(true);
+    const [state, setState] = useState<number>(0);
 
     useEffect(() => {
         if (firstRun.current) {
-            handleUpdate();
-            firstRun.current = false;
+            tokenAuth()
+                .then(() => {
+                    setState(1);
+                })
+                .catch(() => {
+                    setState(0);
+                })
+                .finally(() => {
+                    firstRun.current = false;
+                });
         }
     }, []);
 
     return {
-        taskList,
-        details,
-        dummyUpdate,
-        isLoading,
-        dummyEdit,
+        page: state,
     };
 };
 

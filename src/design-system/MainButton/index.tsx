@@ -8,7 +8,7 @@ interface ITaskButton {
     type: MainButtonTypes;
     content?: string;
     status?: boolean;
-    onClick: () => void;
+    onClick?: () => void;
     disabled?: boolean;
 }
 const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, onClick }) => {
@@ -20,6 +20,7 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, 
                     disabled={disabled}
                     startIcon=""
                     onClick={onClick}
+                    type="submit"
                     sx={{
                         backgroundColor: colorPalette.button.mainBackgroundColor,
                         color: colorPalette.button.mainColor,

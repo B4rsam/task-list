@@ -28,12 +28,4 @@ function editTask(id, text) {
     });
 }
 
-function userAuth(userData) {
-    return apiInstance.post(`auth/login`, userData, { withCredentials: true });
-}
-
-function userSignUp(userData) {
-    return apiInstance.post(`auth/signup`, userData);
-}
-
-export { getTasks, deleteTask, addTask, editStatus, editTask, userAuth, userSignUp };
+export { getTasks, deleteTask, addTask, editStatus, editTask };

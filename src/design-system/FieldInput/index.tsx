@@ -1,21 +1,20 @@
 import { TextField } from "@mui/material";
 import { FC } from "react";
 
-interface ITextField {
-    label: string;
-    value?: string;
-    type: string;
+interface IFieldInput {
+    label?: string;
     name: string;
+    type: string;
+    placeholder?: string;
 }
-const TaskInput: FC<ITextField> = ({ label, value = "", type, name }) => {
+const FieldInput: FC<IFieldInput> = ({ label, name, type, placeholder }) => {
     return (
         <TextField
-            value={value}
-            variant="outlined"
-            placeholder={label}
+            label={label}
+            placeholder={placeholder ?? label}
+            name={name}
             type={type}
             fullWidth
-            name={name}
             sx={{
                 borderRadius: "10px",
                 backgroundColor: "white",
@@ -26,4 +25,4 @@ const TaskInput: FC<ITextField> = ({ label, value = "", type, name }) => {
     );
 };
 
-export default TaskInput;
+export default FieldInput;
