@@ -5,8 +5,14 @@ export interface ITask {
     id: number;
     userId: number;
     body: string;
-    priority?: priorities | 0;
+    priority: priorities;
     status: validStatus;
-    createDate: Date;
-    completedDate?: Date;
+    createDate: string;
+    completedDate?: string;
+}
+
+export interface ITaskResponse {
+    data: ITask[];
+    total: number;
+    completed: number;
 }

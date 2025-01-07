@@ -1,7 +1,9 @@
 import axios from "axios";
 
+console.log(import.meta.env.VITE_API_URL)
+
 const apiInstance = axios.create({
-    baseURL: "http://localhost:3000/task",
+    baseURL: import.meta.env.VITE_API_URL,
 });
 
 export default apiInstance;

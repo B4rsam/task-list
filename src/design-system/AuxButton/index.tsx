@@ -1,11 +1,11 @@
-import { AuxButtonTypes } from "@/interfaces/buttons.ts";
+import { AuxButtonTypes } from "../../interfaces/buttons.ts";
 import { FC } from "react";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from '@mui/icons-material/Close';
-import colorPalette from "@/constants/colorPalette.ts";
-import { isMobile } from "@/utils/isMobile.ts";
+import CloseIcon from "@mui/icons-material/Close";
+import colorPalette from "../../../public/styles/colorPalette.ts";
+import { isMobile } from "../../utils/isMobile.ts";
 
 interface IAuxButton {
     type: AuxButtonTypes;
@@ -27,12 +27,12 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                         color: colorPalette.component.main.background,
                         position: "absolute",
                         top: "-5px",
-                        right: `${!isMobile ? "-180px" : "-28vw" }`,
+                        right: `${!isMobile ? "-180px" : "-28vw"}`,
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
-            )
+            );
         case "editButton":
             return (
                 <IconButton
@@ -57,6 +57,6 @@ const AuxButton: FC<IAuxButton> = ({ type, onClick, id }) => {
                 </IconButton>
             );
     }
-}
+};
 
 export default AuxButton;

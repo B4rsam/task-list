@@ -8,7 +8,7 @@ export default defineConfig({
   base: "/task-list",
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@/*": path.resolve(__dirname, "./src/*"),
     },
   },
 })

@@ -1,9 +1,9 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import colorPalette from "@/constants/colorPalette.ts";
-import {AuxButton, MainButton, TextAreaCustom} from '@/design-system';
-import { ITask } from "@/interfaces/task.ts";
-import { PrioritySelector } from "@/components";
+import colorPalette from "../../../public/styles/colorPalette.ts";
+import { AuxButton, MainButton, TextAreaCustom } from '../../design-system';
+import { ITask } from "../../interfaces/task.ts";
+import { PrioritySelector } from "../../components";
 
 interface IModal {
     handleModal: () => void;

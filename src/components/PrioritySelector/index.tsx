@@ -1,4 +1,4 @@
-import colorPalette from "@/constants/colorPalette.ts";
+import colorPalette from "../../../public/styles/colorPalette.ts";
 import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 
 const PrioritySelector = () => {

@@ -1,8 +1,9 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import colorPalette from "@/constants/colorPalette.ts";
-import { AuxButton, MainButton, TaskInput } from "@/design-system";
-import { userAuth } from "@/services/request";
+import colorPalette from "../../../public/styles/colorPalette.ts";
+import { AuxButton, MainButton, TaskInput } from "../../design-system";
+import { userAuth } from "../../services/request";
+import {userSignUp} from "../../services/request";
 
 interface IUserModal {
     state: boolean;

@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
 import { FC } from "react";
-import { MainButtonTypes } from "@/interfaces/buttons.ts";
-import colorPalette from "@/constants/colorPalette.ts";
-import AddIcon from '@mui/icons-material/Add';
+import { MainButtonTypes } from "../../interfaces/buttons.ts";
+import colorPalette from "../../../public/styles/colorPalette.ts";
+import AddIcon from "@mui/icons-material/Add";
 
 interface ITaskButton {
     type: MainButtonTypes;
@@ -12,7 +12,7 @@ interface ITaskButton {
     disabled?: boolean;
 }
 const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, onClick }) => {
-    switch(type) {
+    switch (type) {
         case "submit":
             return (
                 <Button
@@ -79,11 +79,11 @@ const MainButton: FC<ITaskButton> = ({ type, content, status, disabled = false, 
                     }}
                 >
                     <AddIcon />
-                    <Box sx={{ marginInline: "3px" }}/>
+                    <Box sx={{ marginInline: "3px" }} />
                     {content}
                 </Button>
             );
     }
-}
+};
 
-export default MainButton
+export default MainButton;

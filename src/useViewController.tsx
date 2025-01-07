@@ -1,18 +1,18 @@
-import { getTasks, deleteTask, editTask } from "@/services/request.js";
+import { getTasks, deleteTask, editTask, addTask } from "./services/request.js";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { TaskCard } from "@/components";
-import { ITask } from "@/interfaces/task.ts";
+import { TaskCard } from "./components";
+import { ITask } from "./interfaces/task.ts";
 
 const useViewController = () => {
     const firstRun = useRef(true);
     const [task, setTasks] = useState<ITask[]>([]);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     const handleUpdate = () => {
-        setLoading(true);
-        getTasks().then((data: any) => {
+        getTasks().then((res: any) => {
+            setTasks(res.data.data);
             setLoading(false);
-            setTasks(data.data.data)});
+        });
     };
 
     const getTaskData = (id: number) => {
@@ -23,34 +23,25 @@ const useViewController = () => {
         return tasks.get(id);
     };
 
-    const dummyUpdate = (inTask: ITask) => {
-        const newData = [
-            ...task,
-            {
-                ...inTask,
-                id: task.length + 1,
-            },
-        ];
-        setTasks(newData);
+    const dummyUpdate = (inTask: Partial<ITask>) => {
+        addTask(inTask).then((response: ITask) => {
+            setTasks((prev) => ({
+                ...prev,
+                response,
+            }));
+        });
     };
 
     const dummyEdit = (id: number, data: Partial<ITask>) => {
-        editTask(id, data.body).then((response: any) => {
-            const filteredItem = task.filter((item) => item.id !== response.data.id);
-            setTasks([
-                ...filteredItem,
-                response.data,
-            ]);
-        })
+        editTask(id, data).then((response: ITask) => {
+            setTasks(task.filter(({ id }) => id !== response.id).concat(response));
+        });
     };
 
-    const handleDeletion = (id: number, skip = false) => {
-        if (skip || confirm("Are you sure you wish to delete this task?")) {
-            deleteTask(id).then(() => {
-                const filteredItem = task.filter((task) => task.id !== id);
-                setTasks(filteredItem);
-            });
-        }
+    const handleDeletion = (tid: number) => {
+        deleteTask(tid).then(() => {
+            setTasks(task.filter(({ id }) => id !== tid));
+        });
     };
 
     const details = useMemo(() => ({ getTaskData, handleDeletion, dummyEdit }), [task]);
