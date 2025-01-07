@@ -23,7 +23,7 @@ const TaskInput: FC<ITextField> = ({ label, onChange, value = "", type }) => {
                 width: "100%",
             }}
         />
-    )
+    );
 };
 
 export default TaskInput;

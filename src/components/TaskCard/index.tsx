@@ -1,13 +1,14 @@
 import { Box, Card, Typography } from "@mui/material";
 import { FC, useContext, useState } from "react";
 // @ts-ignore
-import AuxButton from "../../design-system/AuxButton";
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import AuxButton from "@/design-system/AuxButton";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import { MainButton, MobileButton } from "../../design-system";
 import { TaskProvider } from "../../App.tsx";
-import { editStatus } from "../../services/request.js";
-import { isMobile } from "../../utils/isMobile.ts";
-import { EditModal } from "../../components";
+// @ts-ignore
+import { editStatus } from "@/services/request.js";
+import { isMobile } from "@/utils/isMobile.ts";
+import { EditModal } from "@/components";
 
 interface ITaskCard {
     id: number;
@@ -28,7 +29,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
     };
 
     const handlePriority = () => {
-        switch(taskData.priority) {
+        switch (taskData.priority) {
             case 1:
                 return colorPalette.priority.high;
             case 2:
@@ -72,7 +73,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "normal",
-                        fontWeight : `${!isMobile ? "normal" : "bold"}`,
+                        fontWeight: `${!isMobile ? "normal" : "bold"}`,
                         textAlign: "left",
                         marginBlock: "8px",
                     }}
@@ -86,14 +87,32 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         marginBlock: "8px",
                     }}
                 >
-                    <EditModal handleModal={handleModal} state={modal} taskData={taskData} dummyEdit={dummyEdit} />
+                    <EditModal
+                        handleModal={handleModal}
+                        state={modal}
+                        taskData={taskData}
+                        dummyEdit={dummyEdit}
+                    />
                     <AuxButton type="editButton" onClick={handleModal} id={taskData.id} />
                     <AuxButton type="deleteButton" onClick={handleDeletion} id={taskData.id} />
-                    {!isMobile ? <MainButton type="complete" content="Completed" status={status} onClick={() => handleCompletion(taskData.id)} /> : <MobileButton type="complete" status={status} onClick={() => handleCompletion(taskData.id)} />}
+                    {!isMobile ? (
+                        <MainButton
+                            type="complete"
+                            content="Completed"
+                            status={status}
+                            onClick={() => handleCompletion(taskData.id)}
+                        />
+                    ) : (
+                        <MobileButton
+                            type="complete"
+                            status={status}
+                            onClick={() => handleCompletion(taskData.id)}
+                        />
+                    )}
                 </Box>
             </Box>
         </Card>
     );
-}
+};
 
 export default TaskCard;

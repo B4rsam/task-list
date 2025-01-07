@@ -2,7 +2,7 @@ import apiInstance from "./instance.js";
 
 const getTasks = async () => {
     return apiInstance.get("task", { withCredentials: true });
-}
+};
 
 function deleteTask(id) {
     return apiInstance.delete(`task/${id}/delete`);
@@ -33,7 +33,7 @@ function userAuth(userData) {
 }
 
 function userSignUp(userData) {
-    return apiInstance.post(`auth/signup`, userData)
+    return apiInstance.post(`auth/signup`, userData);
 }
 
 export { getTasks, deleteTask, addTask, editStatus, editTask, userAuth, userSignUp };

@@ -1,9 +1,9 @@
 const colorPalette = {
     button: {
-        mainColor: 'white',
-        mainBackgroundColor: 'hsl(225, 21%, 49%)',
+        mainColor: "white",
+        mainBackgroundColor: "hsl(225, 21%, 49%)",
         mainShadow: "hsl(224, 28%, 35%)",
-        auxBackgroundColor: 'hsl(30, 25%, 89%)',
+        auxBackgroundColor: "hsl(30, 25%, 89%)",
         auxShadow: "hsl(28, 16%, 65%)",
         auxColor: "hsl(221, 14%, 31%)",
     },

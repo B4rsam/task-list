@@ -1,9 +1,9 @@
-import { MainButtonTypes } from "../../interfaces/buttons.ts";
+import { MainButtonTypes } from "@/interfaces/buttons.ts";
 import { FC } from "react";
 import { IconButton } from "@mui/material";
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import AddIcon from "@mui/icons-material/Add";
-import DoneIcon from '@mui/icons-material/Done';
+import DoneIcon from "@mui/icons-material/Done";
 
 interface IMobileButton {
     type: MainButtonTypes;
@@ -11,7 +11,7 @@ interface IMobileButton {
     onClick: () => void;
 }
 const MobileButton: FC<IMobileButton> = ({ type, status, onClick }) => {
-    switch(type) {
+    switch (type) {
         case "complete":
             return (
                 <IconButton

@@ -1,9 +1,10 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TextAreaCustom } from "../../design-system";
-import { ITask } from "../../interfaces/task.ts";
-import { addTask } from "../../services/request.js";
+import { ITask } from "@/interfaces/task.ts";
+// @ts-ignore
+import { addTask } from "@/services/request.js";
 import { PrioritySelector } from "../../components";
 
 interface IModal {
@@ -17,7 +18,9 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
         body: undefined,
     };
     const [modalValue, setValue] = useState<Partial<ITask>>(INITIAL_STATE);
-    const [error, setError] = useState<boolean>(modalValue.body === undefined || modalValue.body === "");
+    const [error, setError] = useState<boolean>(
+        modalValue.body === undefined || modalValue.body === ""
+    );
     const handleInput = (value: undefined | string) => {
         setValue({
             ...modalValue,
@@ -72,7 +75,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                     flexDirection: "column",
                     alignItems: "center",
                     boxShadow: `0 3px 1px ${colorPalette.component.secondary.shadow}`,
-                    border: `1px solid ${colorPalette.component.secondary.border}`
+                    border: `1px solid ${colorPalette.component.secondary.border}`,
                 }}
             >
                 <Box
@@ -102,7 +105,10 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                         alignItems: "center",
                     }}
                 >
-                    <TextAreaCustom placeHolder={"Enter Task Details..."} onChange={(e: any) => handleInput(e.target.value)}/>
+                    <TextAreaCustom
+                        placeHolder={"Enter Task Details..."}
+                        onChange={(e: any) => handleInput(e.target.value)}
+                    />
                     <Box
                         sx={{
                             marginBlock: "8px",
@@ -110,10 +116,15 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                     />
                     <PrioritySelector />
                 </Box>
-                <MainButton type="submit" content="Submit" onClick={handleSubmit} disabled={error} />
+                <MainButton
+                    type="submit"
+                    content="Submit"
+                    onClick={handleSubmit}
+                    disabled={error}
+                />
             </Box>
         </Modal>
-    )
+    );
 };
 
 export default TaskModal;

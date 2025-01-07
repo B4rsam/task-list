@@ -1,4 +1,4 @@
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 
 const PrioritySelector = () => {
@@ -22,12 +22,8 @@ const PrioritySelector = () => {
                     backgroundColor: colorPalette.component.secondary.background,
                 }}
             >
-                <ToggleButton value={3}>
-                    Low
-                </ToggleButton>
-                <ToggleButton value={1}>
-                    High
-                </ToggleButton>
+                <ToggleButton value={3}>Low</ToggleButton>
+                <ToggleButton value={1}>High</ToggleButton>
             </ToggleButtonGroup>
         </Box>
     );

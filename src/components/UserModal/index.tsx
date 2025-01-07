@@ -1,9 +1,9 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TaskInput } from "../../design-system";
-import { userAuth } from "../../services/request";
-import {userSignUp} from "../../services/request";
+// @ts-ignore
+import { userAuth } from "@/services/request";
 
 interface IUserModal {
     state: boolean;
@@ -17,11 +17,11 @@ const UserModal: FC<IUserModal> = ({ state, handleModal }) => {
     const INITIAL_STATE = {
         username: undefined,
         password: undefined,
-    }
+    };
     const [modalValue, setValue] = useState<IModalValue>(INITIAL_STATE);
     const [error, setError] = useState<boolean>(false);
     const handleInput = (field: 0 | 1, value: string) => {
-        switch(field) {
+        switch (field) {
             case 0:
                 setValue({
                     ...modalValue,
@@ -42,14 +42,13 @@ const UserModal: FC<IUserModal> = ({ state, handleModal }) => {
         // }
     };
     const handleSubmit = () => {
-        console.log(modalValue)
+        console.log(modalValue);
         if (!error) {
-            userAuth(modalValue)
-                .finally(() => {
-                    setValue(INITIAL_STATE);
-                    setError(true);
-                    handleModal();
-                });
+            userAuth(modalValue).finally(() => {
+                setValue(INITIAL_STATE);
+                setError(true);
+                handleModal();
+            });
         }
     };
     return (
@@ -78,7 +77,7 @@ const UserModal: FC<IUserModal> = ({ state, handleModal }) => {
                     flexDirection: "column",
                     alignItems: "center",
                     boxShadow: `0 3px 1px ${colorPalette.component.secondary.shadow}`,
-                    border: `1px solid ${colorPalette.component.secondary.border}`
+                    border: `1px solid ${colorPalette.component.secondary.border}`,
                 }}
             >
                 <Typography
@@ -97,11 +96,26 @@ const UserModal: FC<IUserModal> = ({ state, handleModal }) => {
                         marginBlock: "8px",
                     }}
                 >
-                    <TaskInput label="Username" onChange={(e) => handleInput(0, e.target.value)} type="text" value={modalValue.username}/>
-                    <Box sx={{ marginBlock: "4px" }}/>
-                    <TaskInput label="Password" onChange={(e) => handleInput(1, e.target.value)} type="password" value={modalValue.password}/>
+                    <TaskInput
+                        label="Username"
+                        onChange={(e) => handleInput(0, e.target.value)}
+                        type="text"
+                        value={modalValue.username}
+                    />
+                    <Box sx={{ marginBlock: "4px" }} />
+                    <TaskInput
+                        label="Password"
+                        onChange={(e) => handleInput(1, e.target.value)}
+                        type="password"
+                        value={modalValue.password}
+                    />
                 </Box>
-                <MainButton type="submit" onClick={handleSubmit} content="Submit" disabled={error}/>
+                <MainButton
+                    type="submit"
+                    onClick={handleSubmit}
+                    content="Submit"
+                    disabled={error}
+                />
             </Box>
         </Modal>
     );

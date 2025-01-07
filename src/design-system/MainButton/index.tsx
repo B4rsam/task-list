@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { FC } from "react";
-import { MainButtonTypes } from "../../interfaces/buttons.ts";
-import colorPalette from "../../../public/styles/colorPalette.ts";
+import { MainButtonTypes } from "@/interfaces/buttons.ts";
+import colorPalette from "#/public/styles/colorPalette.ts";
 import AddIcon from "@mui/icons-material/Add";
 
 interface ITaskButton {

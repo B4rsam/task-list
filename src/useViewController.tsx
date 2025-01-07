@@ -1,7 +1,8 @@
-import { getTasks, deleteTask, editTask, addTask } from "./services/request.js";
+// @ts-ignore
+import { getTasks, deleteTask, editTask, addTask } from "@/services/request.js";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { TaskCard } from "./components";
-import { ITask } from "./interfaces/task.ts";
+import { TaskCard } from "@/components";
+import { ITask } from "@/interfaces/task.ts";
 
 const useViewController = () => {
     const firstRun = useRef(true);
@@ -52,7 +53,7 @@ const useViewController = () => {
             normal: [] as ReactNode[],
             low: [] as ReactNode[],
         };
-        task.forEach(({ id, priority}) => {
+        task.forEach(({ id, priority }) => {
             switch (priority) {
                 case 1:
                     list.high.push(<TaskCard id={id} />);
@@ -64,7 +65,6 @@ const useViewController = () => {
                 default:
                     list.normal.push(<TaskCard id={id} />);
                     break;
-
             }
         });
         return list;

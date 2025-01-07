@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import s from "./textarea.module.css";
 import { FC } from "react";
-import { isMobile } from "../../utils/isMobile.ts";
+import { isMobile } from "@/utils/isMobile.ts";
 interface ITextArea {
     placeHolder: string;
     onChange: (e: any) => void;
@@ -17,7 +17,15 @@ const TextAreaCustom: FC<ITextArea> = ({ placeHolder, onChange, value = "" }) =>
                 width: `${!isMobile ? "446px" : "80vw"}`,
             }}
         >
-            <textarea className={s.textArea} placeholder={placeHolder} maxLength={128} rows={5} onChange={onChange}>{value}</textarea>
+            <textarea
+                className={s.textArea}
+                placeholder={placeHolder}
+                maxLength={128}
+                rows={5}
+                onChange={onChange}
+            >
+                {value}
+            </textarea>
         </Box>
     );
 };
