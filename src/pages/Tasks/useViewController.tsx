@@ -3,19 +3,14 @@ import { TaskCard } from "@/components";
 import { ITask } from "@/interfaces/task.ts";
 // @ts-ignore
 import { addTask, deleteTask, editTask, getTasks } from "@/services/request";
-import { tokenAuth } from "@/services/auth.ts";
 
 const useViewController = () => {
     const firstRun = useRef(true);
     const [task, setTasks] = useState<ITask[]>([]);
     const [isLoading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [showUserModal, setUserModal] = useState<boolean>(true);
     const handleModal = () => {
         setShowModal(!showModal);
-    };
-    const handleUserModal = (state?: boolean) => {
-        setUserModal(state ?? !showUserModal);
     };
 
     const handleUpdate = () => {
@@ -80,13 +75,7 @@ const useViewController = () => {
 
     useEffect(() => {
         if (firstRun.current) {
-            tokenAuth()
-                .then(() => {
-                    handleUpdate();
-                })
-                .catch(() => {
-                    handleUserModal(true);
-                });
+            handleUpdate();
             firstRun.current = false;
         }
     }, []);
@@ -98,9 +87,7 @@ const useViewController = () => {
         isLoading,
         dummyEdit,
         showModal,
-        showUserModal,
         handleModal,
-        handleUserModal,
     };
 };
 
