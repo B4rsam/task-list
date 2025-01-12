@@ -21,17 +21,23 @@ function App() {
                         padding: "16px",
                     }}
                 >
-                    <Typography
-                        component="h1"
-                        variant={!isMobile ? "h3" : "h4"}
-                        sx={{
-                            color: colorPalette.textContent.main,
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Task List
-                    </Typography>
-                    {page === 0 ? <AuthPage /> : <TaskList />}
+                    {page === 0 ? (
+                        <>
+                            <Typography
+                                component="h1"
+                                variant={!isMobile ? "h3" : "h4"}
+                                sx={{
+                                    color: colorPalette.textContent.main,
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                Task List
+                            </Typography>
+                            <AuthPage />
+                        </>
+                    ) : (
+                        <TaskList />
+                    )}
                 </Container>
             </MainProvider.Provider>
         </>

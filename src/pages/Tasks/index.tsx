@@ -13,28 +13,42 @@ const TaskList = () => {
         useViewController();
 
     const handleTasks = () => {
+        if (taskList.high.length || taskList.normal.length || taskList.low.length) {
+            return (
+                <>
+                    {taskList.high && (
+                        <Box
+                            sx={{
+                                marginBottom: "32px",
+                            }}
+                        >
+                            {taskList.high}
+                        </Box>
+                    )}
+                    {taskList.normal && <Box>{taskList.normal}</Box>}
+                    {taskList.low && (
+                        <Box
+                            sx={{
+                                marginTop: "32px",
+                            }}
+                        >
+                            {taskList.low}
+                        </Box>
+                    )}
+                </>
+            );
+        }
         return (
-            <>
-                {taskList.high && (
-                    <Box
-                        sx={{
-                            marginBottom: "32px",
-                        }}
-                    >
-                        {taskList.high}
-                    </Box>
-                )}
-                {taskList.normal && <Box>{taskList.normal}</Box>}
-                {taskList.low && (
-                    <Box
-                        sx={{
-                            marginTop: "32px",
-                        }}
-                    >
-                        {taskList.low}
-                    </Box>
-                )}
-            </>
+            <Typography
+                sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: colorPalette.textContent.taskLabel,
+                    fontSize: "24px",
+                }}
+            >
+                Nothing to show!
+            </Typography>
         );
     };
 
