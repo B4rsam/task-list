@@ -1,7 +1,6 @@
 import { FC } from "react";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { Button } from "@mui/material";
-import { isMobile } from "@/utils/isMobile.ts";
 
 interface IMenuButton {
     onClick?: () => void;

@@ -1,3 +1,4 @@
+// @ts-ignore
 import apiInstance from "./instance.js";
 
 function userLogin(userData: any) {

@@ -4,7 +4,6 @@ import { FC, useContext, useState } from "react";
 import AuxButton from "@/design-system/AuxButton";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { MainButton, MobileButton } from "../../design-system";
-import { TaskProvider } from "../../App.tsx";
 // @ts-ignore
 import { editStatus } from "@/services/request.js";
 import { isMobile } from "@/utils/isMobile.ts";

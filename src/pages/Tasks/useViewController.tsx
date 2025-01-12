@@ -20,7 +20,7 @@ const useViewController = () => {
 
     const handleUpdate = () => {
         getTasks().then((res: any) => {
-            setTasks(res.data.data);
+            setTasks(res.data.data.data);
             setLoading(false);
         });
     };

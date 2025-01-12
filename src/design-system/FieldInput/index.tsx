@@ -14,12 +14,10 @@ const FieldInput: FC<IFieldInput> = ({ label, name, type, placeholder }) => {
             placeholder={placeholder ?? label}
             name={name}
             type={type}
-            fullWidth
+            id={name}
             sx={{
                 borderRadius: "10px",
                 backgroundColor: "white",
-                maxWidth: "448px",
-                width: "100%",
             }}
         />
     );

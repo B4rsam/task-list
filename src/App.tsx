@@ -5,35 +5,35 @@ import { createContext } from "react";
 import useViewController from "@/useViewController.tsx";
 import { AuthPage, TaskList } from "@/pages";
 
-export const TaskProvider = createContext({});
+// @ts-ignore
+export const MainProvider = createContext();
 
 function App() {
-    const { page } = useViewController();
+    const { page, firstRun, handleAuth } = useViewController();
 
     return (
         <>
-            <Container
-                sx={{
-                    backgroundColor: `${!isMobile ? colorPalette.component.main.background : "rgba(0,0,0,0)"}`,
-                    maxWidth: "600px",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "20px",
-                    padding: "16px",
-                }}
-            >
-                <Typography
-                    component="h1"
-                    variant={!isMobile ? "h3" : "h4"}
+            <MainProvider.Provider value={handleAuth}>
+                <Container
                     sx={{
-                        color: colorPalette.textContent.main,
-                        fontWeight: "bold",
+                        backgroundColor: `${!isMobile ? colorPalette.component.main.background : "rgba(0,0,0,0)"}`,
+                        borderRadius: "20px",
+                        padding: "16px",
                     }}
                 >
-                    Task List
-                </Typography>
-                {page === 0 ? <AuthPage /> : <TaskList />}
-            </Container>
+                    <Typography
+                        component="h1"
+                        variant={!isMobile ? "h3" : "h4"}
+                        sx={{
+                            color: colorPalette.textContent.main,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Task List
+                    </Typography>
+                    {page === 0 ? <AuthPage /> : <TaskList />}
+                </Container>
+            </MainProvider.Provider>
         </>
     );
 }

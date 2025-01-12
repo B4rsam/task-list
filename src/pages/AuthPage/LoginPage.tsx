@@ -1,26 +1,44 @@
 import { Box, Typography } from "@mui/material";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { FC } from "react";
-import { FieldInput, MainButton } from "@/design-system";
+import { FieldInput, MainButton, MenuButton } from "@/design-system";
+import { isMobile } from "@/utils/isMobile.ts";
 
 interface ILoginPage {
     handleSubmit: (data: any) => void;
 }
 const LoginPage: FC<ILoginPage> = ({ handleSubmit }) => {
-    return (
-        <Box
-            sx={{
-                maxWidth: "512px",
-                width: "100%",
-                borderRadius: "8px",
-                marginInline: "16px",
-                padding: "8px",
+    const style = () => {
+        if (isMobile) {
+            return {
+                paddingBlock: "32px",
+                paddingInline: "24px",
+                backgroundColor: colorPalette.component.main.background,
+                borderRadius: "20px",
+                height: "auto",
+                maxHeight: "768px",
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "start",
                 alignItems: "center",
-            }}
-        >
-            <form onSubmit={handleSubmit}>
+            };
+        }
+        return {
+            paddingBlock: "32px",
+            paddingInline: "16px",
+            backgroundColor: `${isMobile ? colorPalette.component.main.background : "rgba(0,0,0,0)"}`,
+            borderRadius: "20px",
+            height: "auto",
+            maxHeight: "768px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+        };
+    };
+    return (
+        <Box sx={style()}>
+            <form action={handleSubmit}>
                 <Typography
                     variant="h5"
                     sx={{
@@ -33,14 +51,18 @@ const LoginPage: FC<ILoginPage> = ({ handleSubmit }) => {
                 </Typography>
                 <Box
                     sx={{
-                        marginBlock: "8px",
+                        marginBlock: "16px",
                     }}
                 >
-                    <FieldInput placeholder="Username" name="label" type="text" />
+                    <FieldInput placeholder="Username" name="username" type="text" />
                     <Box sx={{ marginBlock: "4px" }} />
                     <FieldInput placeholder="Password" name="password" type="password" />
                 </Box>
-                <MainButton type="submit" content="Login" />
+                {isMobile ? (
+                    <MenuButton type="submit" content="Login" />
+                ) : (
+                    <MainButton type="submit" content="Login" />
+                )}
             </form>
         </Box>
     );

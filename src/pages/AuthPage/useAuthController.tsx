@@ -1,42 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { pages } from "@/interfaces/authPage.interfaces.ts";
+import { userLogin } from "@/services/auth.ts";
+import { MainProvider } from "@/App.tsx";
 
-interface userValue {
-    username?: string;
-    password?: string;
-}
 const useViewController = () => {
     const [page, setPage] = useState<pages>(0);
-    const INITIAL_STATE = {
-        username: undefined,
-        password: undefined,
-    };
-    const [modalValue, setValue] = useState<userValue>(INITIAL_STATE);
-    const [error, setError] = useState<boolean>(false);
-    const handleInput = (field: 0 | 1, value: string) => {
-        switch (field) {
-            case 0:
-                setValue({
-                    ...modalValue,
-                    username: value,
-                });
-                break;
-            case 1:
-                setValue({
-                    ...modalValue,
-                    password: value,
-                });
-                break;
-        }
-    };
-    const loginSubmit = (data: any) => {
-        console.log(data);
+    const handleAuth = useContext(MainProvider);
+    const loginSubmit = (data: FormData) => {
+        const finalData = {
+            username: data.get("username"),
+            password: data.get("password"),
+        };
+        userLogin(finalData).then(() => {
+            // @ts-ignore
+            handleAuth();
+        });
     };
 
     return {
         page,
         setPage,
-        handleInput,
         loginSubmit,
     };
 };
