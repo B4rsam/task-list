@@ -22,11 +22,10 @@ const useViewController = () => {
         if (firstRun.current) {
             handleAuth();
         }
-    }, [firstRun.current]);
+    }, []);
 
     return {
         page: state,
-        firstRun,
         handleAuth,
     };
 };

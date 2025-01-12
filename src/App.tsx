@@ -9,7 +9,7 @@ import { AuthPage, TaskList } from "@/pages";
 export const MainProvider = createContext();
 
 function App() {
-    const { page, firstRun, handleAuth } = useViewController();
+    const { page, handleAuth } = useViewController();
 
     return (
         <>

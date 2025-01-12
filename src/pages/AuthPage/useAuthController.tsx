@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { pages } from "@/interfaces/authPage.interfaces.ts";
-import { userLogin } from "@/services/auth.ts";
+import { userLogin, userSignUp } from "@/services/auth.ts";
 import { MainProvider } from "@/App.tsx";
 
 const useViewController = () => {
@@ -16,11 +16,22 @@ const useViewController = () => {
             handleAuth();
         });
     };
+    const signupSubmit = (data: FormData) => {
+        const finalData = {
+            username: data.get("username"),
+            password: data.get("password"),
+        };
+        userSignUp(finalData).then(() => {
+            // @ts-ignore
+            setPage(1);
+        });
+    };
 
     return {
         page,
         setPage,
         loginSubmit,
+        signupSubmit,
     };
 };
 
