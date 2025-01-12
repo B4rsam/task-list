@@ -6,8 +6,9 @@ import { isMobile } from "@/utils/isMobile.ts";
 
 interface ILoginPage {
     handleSubmit: (data: any) => void;
+    handleReturn: () => void;
 }
-const LoginPage: FC<ILoginPage> = ({ handleSubmit }) => {
+const LoginPage: FC<ILoginPage> = ({ handleSubmit, handleReturn }) => {
     const style = () => {
         if (isMobile) {
             return {
@@ -39,16 +40,19 @@ const LoginPage: FC<ILoginPage> = ({ handleSubmit }) => {
     return (
         <Box sx={style()}>
             <form action={handleSubmit}>
-                <Typography
-                    variant="h5"
-                    sx={{
-                        textAlign: "center",
-                        color: colorPalette.textContent.main,
-                        fontWeight: "bold",
-                    }}
-                >
-                    User Login
-                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            textAlign: "center",
+                            color: colorPalette.textContent.main,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        User Login
+                    </Typography>
+                    <MenuButton content="Back" onClick={handleReturn} />
+                </Box>
                 <Box
                     sx={{
                         marginBlock: "16px",

@@ -6,8 +6,9 @@ import { FC } from "react";
 
 interface ISignupPage {
     handleSubmit: (data: any) => void;
+    handleReturn: () => void;
 }
-const SignupPage: FC<ISignupPage> = ({ handleSubmit }) => {
+const SignupPage: FC<ISignupPage> = ({ handleSubmit, handleReturn }) => {
     const style = () => {
         if (isMobile) {
             return {
@@ -39,16 +40,19 @@ const SignupPage: FC<ISignupPage> = ({ handleSubmit }) => {
     return (
         <Box sx={style()}>
             <form action={handleSubmit}>
-                <Typography
-                    variant="h5"
-                    sx={{
-                        textAlign: "center",
-                        color: colorPalette.textContent.main,
-                        fontWeight: "bold",
-                    }}
-                >
-                    Sign Up
-                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            textAlign: "center",
+                            color: colorPalette.textContent.main,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Sign Up
+                    </Typography>
+                    <MenuButton content="Back" onClick={handleReturn} />
+                </Box>
                 <Box
                     sx={{
                         marginBlock: "16px",

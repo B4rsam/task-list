@@ -4,14 +4,14 @@ import LoginPage from "@/pages/AuthPage/LoginPage.tsx";
 import SignupPage from "@/pages/AuthPage/SignupPage.tsx";
 
 const AuthPage = () => {
-    const { page, setPage, loginSubmit, signupSubmit } = useViewController();
+    const { page, setPage, loginSubmit, signupSubmit, handleReturn } = useViewController();
 
     const currentPage = () => {
         switch (page) {
             case 1:
-                return <LoginPage handleSubmit={loginSubmit} />;
+                return <LoginPage handleSubmit={loginSubmit} handleReturn={handleReturn} />;
             case 2:
-                return <SignupPage handleSubmit={signupSubmit} />;
+                return <SignupPage handleSubmit={signupSubmit} handleReturn={handleReturn} />;
             case 0:
             default:
                 return <SelectionPage handlePage={setPage} />;

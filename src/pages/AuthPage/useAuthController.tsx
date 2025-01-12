@@ -26,12 +26,16 @@ const useViewController = () => {
             setPage(1);
         });
     };
+    const handleReturn = () => {
+        setPage(0);
+    };
 
     return {
         page,
         setPage,
         loginSubmit,
         signupSubmit,
+        handleReturn,
     };
 };
 
