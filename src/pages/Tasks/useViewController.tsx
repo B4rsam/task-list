@@ -1,8 +1,10 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { TaskCard } from "@/components";
-import { ITask } from "@/interfaces/task.ts";
+import { ITask, ITaskResponse } from "@/interfaces/task.ts";
 // @ts-ignore
 import { addTask, deleteTask, editTask, getTasks } from "@/services/request";
+import { IDataResponse } from "@/interfaces/shared.interfaces.ts";
+import { AxiosResponse } from "axios";
 
 const useViewController = () => {
     const firstRun = useRef(true);
@@ -14,8 +16,8 @@ const useViewController = () => {
     };
 
     const handleUpdate = () => {
-        getTasks().then((res: any) => {
-            setTasks(res.data.data.data);
+        getTasks().then((res: AxiosResponse<IDataResponse<ITaskResponse>>) => {
+            setTasks(res.data.data?.data ?? []);
             setLoading(false);
         });
     };
@@ -29,7 +31,7 @@ const useViewController = () => {
     };
 
     const dummyUpdate = (inTask: Partial<ITask>) => {
-        addTask(inTask).then((response: ITask) => {
+        addTask(inTask).then((response: AxiosResponse<ITask>) => {
             setTasks((prev) => ({
                 ...prev,
                 response,
@@ -38,7 +40,7 @@ const useViewController = () => {
     };
 
     const dummyEdit = (id: number, data: Partial<ITask>) => {
-        editTask(id, data).then((response: ITask) => {
+        editTask(id, data).then((response: any) => {
             setTasks(task.filter(({ id }) => id !== response.id).concat(response));
         });
     };

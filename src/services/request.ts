@@ -23,7 +23,7 @@ function editStatus(id: number, status: validStatus) {
     });
 }
 
-function editTask(id: number, text: string) {
+function editTask(id: number, text: any) {
     return apiInstance.put(`task/${id}/edit`, {
         body: text,
     });
