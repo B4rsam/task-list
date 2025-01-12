@@ -1,8 +1,8 @@
 // @ts-ignore
-import apiInstance from "./instance.js";
+import apiInstance from "./instance.ts";
 
 function userLogin(userData: any) {
-    return apiInstance.post(`auth/login`, userData, { withCredentials: true });
+    return apiInstance.post(`auth/login`, userData);
 }
 
 function userSignUp(userData: any) {
@@ -10,7 +10,7 @@ function userSignUp(userData: any) {
 }
 
 function tokenAuth() {
-    return apiInstance.get("auth", { withCredentials: true });
+    return apiInstance.get("auth");
 }
 
 export { userLogin, userSignUp, tokenAuth };

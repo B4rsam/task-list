@@ -5,7 +5,7 @@ import AuxButton from "@/design-system/AuxButton";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { MainButton, MobileButton } from "../../design-system";
 // @ts-ignore
-import { editStatus } from "@/services/request.js";
+import { editStatus } from "@/services/request.ts";
 import { isMobile } from "@/utils/isMobile.ts";
 import { EditModal } from "@/components";
 

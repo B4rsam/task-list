@@ -1,14 +1,15 @@
-import apiInstance from "./instance.js";
+import apiInstance from "./instance.ts";
+import { validStatus } from "@/interfaces/task.ts";
 
 const getTasks = async () => {
-    return apiInstance.get("task", { withCredentials: true });
+    return apiInstance.get("task");
 };
 
-function deleteTask(id) {
+function deleteTask(id: number) {
     return apiInstance.delete(`task/${id}/delete`);
 }
 
-function addTask(task) {
+function addTask(task: any) {
     return apiInstance.post("task/add", {
         body: task.todo,
         completed: task.completed,
@@ -16,13 +17,13 @@ function addTask(task) {
     });
 }
 
-function editStatus(id, status) {
+function editStatus(id: number, status: validStatus) {
     return apiInstance.put(`task/${id}/update`, {
         status: status ? "complete" : "ongoing",
     });
 }
 
-function editTask(id, text) {
+function editTask(id: number, text: string) {
     return apiInstance.put(`task/${id}/edit`, {
         body: text,
     });
