@@ -27,11 +27,11 @@ const PrioritySelector = ({
             <ToggleButtonGroup value={value}>
                 <ToggleButton
                     sx={{
-                        color: `${value === (3 as priorities) ? colorPalette.button.mainColor : colorPalette.button.mainBackgroundColor}`,
-                        backgroundColor: `${value === (3 as priorities) ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
+                        color: `${value === (2 as priorities) ? colorPalette.button.mainColor : colorPalette.button.mainBackgroundColor}`,
+                        backgroundColor: `${value === (2 as priorities) ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
                     }}
-                    value={3}
-                    onClick={() => setValue(3 as priorities)}
+                    value={2}
+                    onClick={() => setValue(2 as priorities)}
                 >
                     Low
                 </ToggleButton>
