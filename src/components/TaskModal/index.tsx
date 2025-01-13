@@ -44,7 +44,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                 })
                 .finally(() => {
                     setValue(INITIAL_STATE);
-                    setError(false);
+                    setError(true);
                     handleModal();
                 });
         }

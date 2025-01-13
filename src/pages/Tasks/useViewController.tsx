@@ -31,10 +31,10 @@ const useViewController = () => {
     };
 
     const dummyUpdate = (inTask: Partial<ITask>) => {
-        addTask(inTask).then((response: AxiosResponse<ITask>) => {
+        addTask(inTask).then((response: any) => {
             setTasks((prev) => ({
                 ...prev,
-                response,
+                ...response.data.data,
             }));
         });
     };

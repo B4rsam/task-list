@@ -8,6 +8,7 @@ import { MainButton, MobileButton } from "../../design-system";
 import { editStatus } from "@/services/request.ts";
 import { isMobile } from "@/utils/isMobile.ts";
 import { EditModal } from "@/components";
+import { TaskProvider } from "@/pages/Tasks";
 
 interface ITaskCard {
     id: number;

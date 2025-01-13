@@ -9,11 +9,10 @@ const useViewController = () => {
         tokenAuth()
             .then(() => {
                 setState(1);
+                firstRun.current = false;
             })
             .catch(() => {
                 setState(0);
-            })
-            .finally(() => {
                 firstRun.current = false;
             });
     };

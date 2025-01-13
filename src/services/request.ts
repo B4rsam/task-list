@@ -1,5 +1,4 @@
 import apiInstance from "./instance.ts";
-import { validStatus } from "@/interfaces/task.ts";
 
 const getTasks = async () => {
     return apiInstance.get("task");
@@ -11,13 +10,12 @@ function deleteTask(id: number) {
 
 function addTask(task: any) {
     return apiInstance.post("task/add", {
-        body: task.todo,
-        completed: task.completed,
-        userId: 1,
+        body: task.body,
+        status: task.status,
     });
 }
 
-function editStatus(id: number, status: validStatus) {
+function editStatus(id: number, status: boolean) {
     return apiInstance.put(`task/${id}/update`, {
         status: status ? "complete" : "ongoing",
     });
