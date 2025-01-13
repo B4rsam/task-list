@@ -1,7 +1,14 @@
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { priorities } from "@/interfaces/task.ts";
 
-const PrioritySelector = () => {
+const PrioritySelector = ({
+    value,
+    setValue,
+}: {
+    value: priorities;
+    setValue: (val: priorities) => void;
+}) => {
     return (
         <Box
             sx={{
@@ -17,13 +24,27 @@ const PrioritySelector = () => {
             >
                 Task Priority:
             </Typography>
-            <ToggleButtonGroup
-                sx={{
-                    backgroundColor: colorPalette.component.secondary.background,
-                }}
-            >
-                <ToggleButton value={3}>Low</ToggleButton>
-                <ToggleButton value={1}>High</ToggleButton>
+            <ToggleButtonGroup value={value}>
+                <ToggleButton
+                    sx={{
+                        color: `${value === (3 as priorities) ? colorPalette.button.mainColor : colorPalette.button.mainBackgroundColor}`,
+                        backgroundColor: `${value === (3 as priorities) ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
+                    }}
+                    value={3}
+                    onClick={() => setValue(3 as priorities)}
+                >
+                    Low
+                </ToggleButton>
+                <ToggleButton
+                    sx={{
+                        color: `${value === (1 as priorities) ? colorPalette.button.mainColor : colorPalette.button.mainBackgroundColor}`,
+                        backgroundColor: `${value === (1 as priorities) ? colorPalette.button.mainBackgroundColor : colorPalette.button.auxBackgroundColor}`,
+                    }}
+                    value={1}
+                    onClick={() => setValue(1 as priorities)}
+                >
+                    High
+                </ToggleButton>
             </ToggleButtonGroup>
         </Box>
     );

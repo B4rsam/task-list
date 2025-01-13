@@ -11,7 +11,7 @@ function deleteTask(id: number) {
 function addTask(task: any) {
     return apiInstance.post("task/add", {
         body: task.body,
-        status: task.status,
+        priority: task.priority,
     });
 }
 

@@ -2,7 +2,7 @@ import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TextAreaCustom } from "../../design-system";
-import { ITask } from "@/interfaces/task.ts";
+import { ITask, priorities } from "@/interfaces/task.ts";
 // @ts-ignore
 import { PrioritySelector } from "../../components";
 
@@ -17,6 +17,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
         body: undefined,
     };
     const [modalValue, setValue] = useState<Partial<ITask>>(INITIAL_STATE);
+    const [priority, setPriority] = useState<priorities>(0);
     const [error, setError] = useState<boolean>(true);
     const handleInput = (value: undefined | string) => {
         setValue({
@@ -31,13 +32,14 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
     };
     const handleClose = () => {
         setValue(INITIAL_STATE);
+        setPriority(0);
         setError(true);
         handleModal();
     };
 
     const onSubmit = () => {
         if (!error && modalValue.body && modalValue.body !== "") {
-            handleSubmit(modalValue);
+            handleSubmit({ ...modalValue, priority });
             handleModal();
         }
     };
@@ -106,7 +108,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
                             marginBlock: "8px",
                         }}
                     />
-                    <PrioritySelector />
+                    <PrioritySelector value={priority} setValue={setPriority} />
                 </Box>
                 <MainButton type="submit" content="Submit" onClick={onSubmit} disabled={error} />
             </Box>

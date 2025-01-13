@@ -2,7 +2,7 @@ import { Box, Modal, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TextAreaCustom } from "@/design-system";
-import { ITask } from "@/interfaces/task.ts";
+import { ITask, priorities } from "@/interfaces/task.ts";
 import { PrioritySelector } from "@/components";
 
 interface IModal {
@@ -14,11 +14,13 @@ interface IModal {
 
 const EditModal: FC<IModal> = ({ handleModal, state, taskData, handleEdit }) => {
     const [modalValue, setValue] = useState<Partial<ITask>>(taskData);
+    const [priority, setPriority] = useState<priorities>(taskData.priority);
     const [error, setError] = useState<boolean>(
         modalValue.body === undefined || modalValue.body === ""
     );
     const handleClose = () => {
         setValue(taskData);
+        setPriority(taskData.priority);
         setError(false);
         handleModal();
     };
@@ -38,7 +40,7 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, handleEdit }) => 
         if (modalValue.body === "" || modalValue.body === undefined) {
             setError(true);
         } else if (!error) {
-            handleEdit(taskData.id, modalValue as ITask);
+            handleEdit(taskData.id, { ...modalValue, priority } as ITask);
             setError(false);
             handleModal();
         }
@@ -108,7 +110,7 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, handleEdit }) => 
                             marginBlock: "8px",
                         }}
                     />
-                    <PrioritySelector />
+                    <PrioritySelector value={priority} setValue={setPriority} />
                 </Box>
                 <MainButton
                     type="submit"
