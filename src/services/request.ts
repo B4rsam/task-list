@@ -21,10 +21,8 @@ function editStatus(id: number, status: boolean) {
     });
 }
 
-function editTask(id: number, text: any) {
-    return apiInstance.put(`task/${id}/edit`, {
-        body: text,
-    });
+function editTask(id: number, data: any) {
+    return apiInstance.put(`task/${id}/edit`, data);
 }
 
 export { getTasks, deleteTask, addTask, editStatus, editTask };

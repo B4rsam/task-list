@@ -9,7 +9,7 @@ import { createContext } from "react";
 export const TaskProvider = createContext({});
 
 const TaskList = () => {
-    const { taskList, details, isLoading, dummyUpdate, handleModal, showModal } =
+    const { taskList, details, isLoading, handleAdd, handleModal, showModal } =
         useViewController();
 
     const handleTasks = () => {
@@ -93,7 +93,7 @@ const TaskList = () => {
                     <TaskModal
                         handleModal={handleModal}
                         state={showModal}
-                        dummyUpdate={dummyUpdate}
+                        handleSubmit={handleAdd}
                     />
                     {!isMobile ? (
                         <MainButton type="addButton" content="Add Task" onClick={handleModal} />

@@ -30,18 +30,19 @@ const useViewController = () => {
         return tasks.get(id);
     };
 
-    const dummyUpdate = (inTask: Partial<ITask>) => {
-        addTask(inTask).then((response: any) => {
-            setTasks((prev) => ({
-                ...prev,
-                ...response.data.data,
-            }));
+    const handleAdd = (inTask: Partial<ITask>) => {
+        addTask(inTask).then((response: AxiosResponse<IDataResponse<ITask>>) => {
+            setTasks((prev) => [...prev, response.data.data as ITask]);
         });
     };
 
-    const dummyEdit = (id: number, data: Partial<ITask>) => {
-        editTask(id, data).then((response: any) => {
-            setTasks(task.filter(({ id }) => id !== response.id).concat(response));
+    const handleEdit = (id: number, data: Partial<ITask>) => {
+        editTask(id, data).then((response: AxiosResponse<IDataResponse<ITask>>) => {
+            setTasks(
+                task
+                    .filter(({ id }) => id !== response.data.data?.id)
+                    .concat(response.data.data as ITask)
+            );
         });
     };
 
@@ -50,7 +51,8 @@ const useViewController = () => {
             setTasks(task.filter(({ id }) => id !== tid));
         });
     };
-    const details = useMemo(() => ({ getTaskData, handleDeletion, dummyEdit }), [task]);
+
+    const details = useMemo(() => ({ getTaskData, handleDeletion, handleEdit }), [task]);
     const taskIds = useMemo(() => task.map((item) => item.id), [task]);
     const taskList = useMemo(() => {
         const list = {
@@ -85,9 +87,9 @@ const useViewController = () => {
     return {
         taskList,
         details,
-        dummyUpdate,
+        handleAdd,
         isLoading,
-        dummyEdit,
+        handleEdit,
         showModal,
         handleModal,
     };

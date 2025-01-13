@@ -9,10 +9,10 @@ interface IModal {
     handleModal: () => void;
     state: boolean;
     taskData: ITask;
-    dummyEdit: (id: number, data: any) => void;
+    handleEdit: (id: number, data: any) => void;
 }
 
-const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
+const EditModal: FC<IModal> = ({ handleModal, state, taskData, handleEdit }) => {
     const [modalValue, setValue] = useState<Partial<ITask>>(taskData);
     const [error, setError] = useState<boolean>(
         modalValue.body === undefined || modalValue.body === ""
@@ -38,7 +38,7 @@ const EditModal: FC<IModal> = ({ handleModal, state, taskData, dummyEdit }) => {
         if (modalValue.body === "" || modalValue.body === undefined) {
             setError(true);
         } else if (!error) {
-            dummyEdit(taskData.id, modalValue as ITask);
+            handleEdit(taskData.id, modalValue as ITask);
             setError(false);
             handleModal();
         }

@@ -4,16 +4,15 @@ import colorPalette from "#/public/styles/colorPalette.ts";
 import { AuxButton, MainButton, TextAreaCustom } from "../../design-system";
 import { ITask } from "@/interfaces/task.ts";
 // @ts-ignore
-import { addTask } from "@/services/request.ts";
 import { PrioritySelector } from "../../components";
 
 interface IModal {
     handleModal: () => void;
     state: boolean;
-    dummyUpdate: (inTask: ITask) => void;
+    handleSubmit: (inTask: Partial<ITask>) => void;
 }
 
-const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
+const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
     const INITIAL_STATE = {
         body: undefined,
     };
@@ -33,20 +32,10 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
         }
     };
 
-    const handleSubmit = () => {
-        if (modalValue.body === "" || modalValue.body === undefined) {
-            setError(true);
-        } else if (!error) {
-            addTask(modalValue)
-                .catch()
-                .then((response: any) => {
-                    dummyUpdate(response.data);
-                })
-                .finally(() => {
-                    setValue(INITIAL_STATE);
-                    setError(true);
-                    handleModal();
-                });
+    const onSubmit = () => {
+        if (!error && modalValue.body && modalValue.body !== "") {
+            handleSubmit(modalValue);
+            handleModal();
         }
     };
 
@@ -119,7 +108,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, dummyUpdate }) => {
                 <MainButton
                     type="submit"
                     content="Submit"
-                    onClick={handleSubmit}
+                    onClick={onSubmit}
                     disabled={error}
                 />
             </Box>

@@ -15,7 +15,7 @@ interface ITaskCard {
 }
 const TaskCard: FC<ITaskCard> = ({ id }) => {
     // @ts-ignore
-    const { getTaskData, handleDeletion, dummyEdit } = useContext(TaskProvider);
+    const { getTaskData, handleDeletion, handleEdit } = useContext(TaskProvider);
     const taskData = getTaskData(id);
     const [status, setStatus] = useState<boolean>(taskData.status === "complete");
     const [modal, setModal] = useState<boolean>(false);
@@ -74,7 +74,6 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         textOverflow: "ellipsis",
                         whiteSpace: "normal",
                         fontWeight: `${!isMobile ? "normal" : "bold"}`,
-                        textAlign: "left",
                         marginBlock: "8px",
                     }}
                 >
@@ -91,7 +90,7 @@ const TaskCard: FC<ITaskCard> = ({ id }) => {
                         handleModal={handleModal}
                         state={modal}
                         taskData={taskData}
-                        dummyEdit={dummyEdit}
+                        handleEdit={handleEdit}
                     />
                     <AuxButton type="editButton" onClick={handleModal} id={taskData.id} />
                     <AuxButton type="deleteButton" onClick={handleDeletion} id={taskData.id} />
