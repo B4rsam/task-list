@@ -17,9 +17,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
         body: undefined,
     };
     const [modalValue, setValue] = useState<Partial<ITask>>(INITIAL_STATE);
-    const [error, setError] = useState<boolean>(
-        modalValue.body === undefined || modalValue.body === ""
-    );
+    const [error, setError] = useState<boolean>(true);
     const handleInput = (value: undefined | string) => {
         setValue({
             ...modalValue,
@@ -30,6 +28,11 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
         } else {
             setError(false);
         }
+    };
+    const handleClose = () => {
+        setValue(INITIAL_STATE);
+        setError(true);
+        handleModal();
     };
 
     const onSubmit = () => {
@@ -42,7 +45,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
     return (
         <Modal
             open={state}
-            onClose={handleModal}
+            onClose={handleClose}
             sx={{
                 zIndex: "4501",
                 paddingInline: "16px",
@@ -85,7 +88,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
                     >
                         Add new Task
                     </Typography>
-                    <AuxButton type="cancel" onClick={handleModal} />
+                    <AuxButton type="cancel" onClick={handleClose} />
                 </Box>
                 <Box
                     sx={{
@@ -105,12 +108,7 @@ const TaskModal: FC<IModal> = ({ handleModal, state, handleSubmit }) => {
                     />
                     <PrioritySelector />
                 </Box>
-                <MainButton
-                    type="submit"
-                    content="Submit"
-                    onClick={onSubmit}
-                    disabled={error}
-                />
+                <MainButton type="submit" content="Submit" onClick={onSubmit} disabled={error} />
             </Box>
         </Modal>
     );
